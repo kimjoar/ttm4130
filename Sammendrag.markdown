@@ -1,7 +1,7 @@
+Sammendrag av TTM4130 - Tjenesteintelligens og mobilitet
+========================================================
 
-
-* Et fremtidig heterogent nett vil få et omfattende behov for overganger (gateways) for overføring av både styresignaler og "nyttesignaler" mellom forskjelllige deler av nettet.
-* Mål for framtidig tjenesteutvikling er å etablere et fleksiblet verktøysett av "tjenestemoduler" som kan instansieres/plugges inn i nettverket etter behov. Dette setter store krav til spesifisering og standardisering.
+Sammendraget er basert på læringsmålene i faget, og tar utgangspunkt i fagets kompendium og forelesningsfoiler, samt delvis ekstramaterialet spesifisert i læringsmålene.
 
 Know the difference between access network, transport network and service platform/IN
 -------------------------------------------------------------------------------------
@@ -125,3 +125,9 @@ Be able to describe the philosophy behind/principles of “stateless network con
 
 Know what a Media Gateway and a Media Gateway Controller is/does
 ----------------------------------------------------------------
+
+Noen ikke-plasserte notater
+---------------------------
+
+* Et fremtidig heterogent nett vil få et omfattende behov for overganger (gateways) for overføring av både styresignaler og "nyttesignaler" mellom forskjelllige deler av nettet.
+* Mål for framtidig tjenesteutvikling er å etablere et fleksiblet verktøysett av "tjenestemoduler" som kan instansieres/plugges inn i nettverket etter behov. Dette setter store krav til spesifisering og standardisering.
