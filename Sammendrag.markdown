@@ -3,6 +3,8 @@ Sammendrag av TTM4130 - Tjenesteintelligens og mobilitet
 
 Sammendraget er basert på læringsmålene i faget, og tar utgangspunkt i fagets kompendium og forelesningsfoiler, samt delvis ekstramaterialet spesifisert i læringsmålene.
 
+(Deler av stoffet er kopiert fra ekstrematerialet, Wikipedia, eller andre kilder, og det er derfor mye blanding av norsk og engelsk i dette dokumentet.)
+
 Know the difference between access network, transport network and service platform/IN
 -------------------------------------------------------------------------------------
 
@@ -38,10 +40,42 @@ Be familiar with the Intelligent Network architecture
 * The Intelligent Network is a network architecture intended both for fixed as well as mobile telecom networks. It allows operators to differentiate themselves by providing value-added services in addition to the standard telecom services such as PSTN, ISDN and GSM services on mobile phones.
 * In IN, the intelligence is provided by network nodes owned by telecom operators, as opposed to solutions based on intelligence in the telephone equipment, or in Internet servers provided by any part.
 * IN is based on the Signaling System #7 (SS7) protocol between telephone network switching centers and other network nodes owned by network operators.
+* The main concepts (functional view) surrounding IN services or architecture are connected with SS7 architecture.
 * IN er et distribuert system for tjenestestyring.
+* The standards define a complete architecture including the architectural view, state machines, physical implementation and protocols. 
+* Before IN was developed, all new feature and/or services that were to be added had to be implemented directly in the core switch systems. This made for very long release cycles as the bug hunting and testing had to be extensive and thorough to prevent the network from failing. With the advent of IN, most of these services were moved out of the core switch systems and into self serving nodes (IN), thus creating a modular and more secure network that allowed the services providers themselves to develop variations and value-added services to their network without submitting a request to the core switch manufacturer and wait for the long development process.
+* IN kan grovt sett sees som en tjenesteplattform som "utvider" transportnettet.
 
 Be familiar with and be able to describe the mode of operations for the most important IN physical and functional entities, including SSP, STP, SCP, SDP and SMF, and what IP indicates in this context/relation. 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+### Service Switching Function (SSF) or Service Switching Point (SSP)
+
+* Co-located with the telephone exchange itself, and acts as the trigger point for further services to be invoked during a call.
+* Implements the Basic Call State Machine (BCSM). 
+* As each state is traversed, the exchange encounters Detection Points (DPs) at which the SSP may invoke a query to the SCP to wait for further instructions on how to proceed. This query is usually called a trigger. Trigger criteria are defined by the operator and might include the subscriber calling number or the dialled number. The SSF is responsible for entertaining calls requiring value added services.
+
+### Service Control Function (SCF) or Service Control Point (SCP) 
+
+* Separate set of platforms that receive queries from the SSP. 
+* The SCP contains service logic which implements the behaviour desired by the operator, i.e., the services. 
+* During service logic processing, additional data required to process the call may be obtained from the SDF. 
+* The logic on the SCP is created using the SCE.
+
+### Service Data Function (SDF) or Service Data Point (SDP) 
+
+* Database that contains additional subscriber data, or other data required to process a call. 
+* The SDF may be a separate platform, or is sometimes co-located with the SCP.
+
+### Service Creation Environment (SCE) 
+
+* Development environment used to create the services present on the SCP. 
+* Proprietary graphical languages have been used to enable telecom engineers to create services directly. The user can use Graphical Interface to manipulate between different functions to formulate a service.
+* Samsnakker med SMP.
+
+### Specialized Resource Function (SRF) or Intelligent Peripheral (IP) 
+
+* This is a node which can connect to both the SSP and the SCP and delivers additional special resources into the call, mostly related to voice data, for example play voice announcements or collect DTMF tones from the user.
 
 Know what Signalling System No 7 is and how it is used
 ------------------------------------------------------
