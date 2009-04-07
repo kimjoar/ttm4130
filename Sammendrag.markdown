@@ -48,7 +48,7 @@ Be familiar with the Intelligent Network architecture
 * Before IN was developed, all new feature and/or services that were to be added had to be implemented directly in the core switch systems. This made for very long release cycles as the bug hunting and testing had to be extensive and thorough to prevent the network from failing. With the advent of IN, most of these services were moved out of the core switch systems and into self serving nodes (IN), thus creating a modular and more secure network that allowed the services providers themselves to develop variations and value-added services to their network without submitting a request to the core switch manufacturer and wait for the long development process.
 * IN kan grovt sett sees som en tjenesteplattform som "utvider" transportnettet.
 * Konseptuell modell i fire nivåer/plan. Each plane introduces an abstract view of the network entities, which is further made tangible in the plane below it. Tolkes top/down:
-  1. Service plane. Abstrakt spesifikasjonslag. Tjenester beskrives ved hjelp av generelle blokker kalt Service Features. En tjeneste er et selvstendig kommersielt tilbud, og en tjenesteegenskap (service feature) beskriver et spesielt aspekt ved en tjeneste. Tjeneste og funksjoner realiseres ved hjelp av funksjoner fra nest øverste plan, såkalte Service Independent Blocks (SIB).
+  1. Service plane. Abstrakt spesifikasjonslag. Tjenester beskrives ved hjelp av generelle blokker kalt Service Features (SF). En tjeneste er et selvstendig kommersielt tilbud, og en tjenesteegenskap (SF) beskriver et spesielt aspekt ved en tjeneste. Tjeneste og funksjoner realiseres ved hjelp av funksjoner fra nest øverste plan, såkalte Service Independent Blocks (SIB).
   2. Global functional plane. Delt i to deler. 
     * Global tjenestelogikk som styrer instanser av SIB-er. Samlingen av disse representerer et bibliotek som kan anvendes til å realisere tjenester. Tjenestelogikken spesifiserer hvordan et utvalg av slik funksjonalitet skal manøvreres for å skape en tjeneste. The SIBs are reusable components that can be chained together to construct a service logic. En enkelt SIB er en prosess som kan motta data, deretter prosessere denne, for så å overlevere til neste trini i kjeden.
     * ... Basic Call Processing (BCP) er et særtilfelle av en SIB. Utførelsen av en tjeneste starter og ender i BCP.
@@ -82,6 +82,9 @@ Disse enhetene er stort sett forbundet ved hjelp av SS7-signalisering.
 * The logic on the SCP is created using the SCE.
 * Enhet som styrer tjenesten.
 * Inneholder tjenestestyringslogikk som avgjør hvordan en innkommende henvendelse skal tolkes, hvilke parametre som trenger å hentes inn gjennom oppslag i SDP, og hvordan den videre gang blir.
+* The SSP contains Detection Capability to detect requests for IN services. It also contains capabilities to communicate with other PEs containing SCF, such as SCP, and to respond to instructions from the other PEs.
+* In case of external Service Data Point (SDP) the SCF can access data through a signalling network.
+* The SDP may be in the same network as the SCP, or in another network.
 
 ### Service Data Function (SDF) or Service Data Point (SDP) 
 
@@ -98,6 +101,7 @@ Disse enhetene er stort sett forbundet ved hjelp av SS7-signalisering.
 
 * This is a node which can connect to both the SSP and the SCP and delivers additional special resources into the call, mostly related to voice data, for example play voice announcements or collect DTMF tones from the user.
 * Enhet utstyrt med tonesender/-mottaker, opptaker/avspiller for kunde- og systemgenererte meldinger.
+* An SCP or Adjunct can request an SSP to connect a user to a resource located in an IP that is connected to the SSP from which the service request is detected. An SCP or Adjunct can also request the SSP to connect a user to a resource located in an IP that is connected to another SSP.
 
 ### Signal Transfer Point
 
@@ -111,6 +115,7 @@ Disse enhetene er stort sett forbundet ved hjelp av SS7-signalisering.
 
 * Sentral uten IN-funksjoner.
 * Må benytte seg av SSP-utstyr i andre sentraler for å få tilknytning.
+* This NAP cannot communicate with an SCF, but it has the ability to determine when IN processing is required. It must send calls requiring IN processing to an SSP.
 
 ### Service Node (SN)
 
@@ -149,8 +154,30 @@ Know what TMN is and what it is used for
 Know the meaning of Terminal Mobility, Person Mobility and Service Mobility. Describing mobility handling in the GSM- and IP-world included. 
 --------------------------------------------------------------------------------------------------------------------------------------------
 
+* Terminalmobilitet: Terminalen kan bevege seg, mens tjenesten opprettholdes.
+* Brukermobilitet: Brukeren kan være hvor han vil. Adgang til tjenester uavhengig av hvilken fysisk terminal som brukes.
+* Sesjonsmobilitet: Kan beholde en aktiv sesjon, selv om terminal byttes.
+* Tjenestemobilitet: Programvaremodler kan overføres fra en maskin til en annen.
+* Personmobilitet: Tillatter en person å benytte tjenester som er tilpasset egne preferanser og abonnenter uavhengig av fysisk plassering og spesielt utstyr.
+* Rollemobilitet: Flere roller/profiler. "Jeg vil være en person på jobb og en annen hjemme."
+* Kontinuerlig mobilitet: Avbruddsfri tilgang på tjenester selv under flytting/bevegelse.
+* Diskret mobilitet: Tjeneste avbrytes under flytting, men taes opp igjen etterpå. Kan f.eks. har kontinuerlig mobilitet innenfor et gitt dekningsområde, og diskret mobilitet mellom dekningsområder.
+
+Mobilitet medfører at man tar meg seg /flytter ressurser eller en forbindelse fra et sted i nettet til et annet.  Har da behov for entydig identifisering av terminalen i det nye nettet. I tillegg trenger man autorisasjon for å ta i bruk ressurser i det nye nettet. Og det trengs en rengskapsfunksjon som grunnlag for betaling. => AAA (Authentication, Authorization, Accouting)
+
 Be able to describe what AAA means and where these functions are used. To be able to give a simple explanation/characterization of the protocols Radius and Diameter 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+### Authentication
+
+* Fysisk adgang
+* Terminalidentitet
+* Passord/PIN-kode
+
+### Authorization
+
+### Accounting
+
 
 Be able to describe what a Meta Protocol is and how the use of such protocols are intended (with reference to ETSIs TIPHON standards and consecutive standards). 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
