@@ -37,6 +37,8 @@ Minst tre forskjellige nivåer av informasjon:
 Be familiar with the Intelligent Network architecture
 -----------------------------------------------------
 
+* The term Intelligent Networks (IN) is used to describe an architectural concept which is intended to be applicable to all telecommunications networks and aims to ease the introduction and management of new services.
+* With IN technology it is possible to introduce new services rapidly without affecting the available services. IN defines a large set of standards that describe the interfaces between different network control points. With only specifying the interfaces IN makes it possible for vendor systems to provide with different products and, of course, for operators to use any of these products in their network configuration.
 * The Intelligent Network is a network architecture intended both for fixed as well as mobile telecom networks. It allows operators to differentiate themselves by providing value-added services in addition to the standard telecom services such as PSTN, ISDN and GSM services on mobile phones.
 * In IN, the intelligence is provided by network nodes owned by telecom operators, as opposed to solutions based on intelligence in the telephone equipment, or in Internet servers provided by any part.
 * IN is based on the Signaling System #7 (SS7) protocol between telephone network switching centers and other network nodes owned by network operators.
@@ -45,15 +47,32 @@ Be familiar with the Intelligent Network architecture
 * The standards define a complete architecture including the architectural view, state machines, physical implementation and protocols. 
 * Before IN was developed, all new feature and/or services that were to be added had to be implemented directly in the core switch systems. This made for very long release cycles as the bug hunting and testing had to be extensive and thorough to prevent the network from failing. With the advent of IN, most of these services were moved out of the core switch systems and into self serving nodes (IN), thus creating a modular and more secure network that allowed the services providers themselves to develop variations and value-added services to their network without submitting a request to the core switch manufacturer and wait for the long development process.
 * IN kan grovt sett sees som en tjenesteplattform som "utvider" transportnettet.
+* Konseptuell modell i fire nivåer/plan. Each plane introduces an abstract view of the network entities, which is further made tangible in the plane below it. Tolkes top/down:
+  1. Service plane. Abstrakt spesifikasjonslag. Tjenester beskrives ved hjelp av generelle blokker kalt Service Features. En tjeneste er et selvstendig kommersielt tilbud, og en tjenesteegenskap (service feature) beskriver et spesielt aspekt ved en tjeneste. Tjeneste og funksjoner realiseres ved hjelp av funksjoner fra nest øverste plan, såkalte Service Independent Blocks (SIB).
+  2. Global functional plane. Delt i to deler. 
+    * Global tjenestelogikk som styrer instanser av SIB-er. Samlingen av disse representerer et bibliotek som kan anvendes til å realisere tjenester. Tjenestelogikken spesifiserer hvordan et utvalg av slik funksjonalitet skal manøvreres for å skape en tjeneste. The SIBs are reusable components that can be chained together to construct a service logic. En enkelt SIB er en prosess som kan motta data, deretter prosessere denne, for så å overlevere til neste trini i kjeden.
+    * ... Basic Call Processing (BCP) er et særtilfelle av en SIB. Utførelsen av en tjeneste starter og ender i BCP.
+  3. Distributed functional plane. Inneholder en beskrivelse av hvordan SIB-funksjonalitet skapes ved hjelp av Functional Entities (FE). FE-kan distribueres i nettet, men én enkelt FE kan ikke distribueres. Altså kan FE-ene til én SIB være distribuert. Hver FE må utføre en Functional Entity Action (FEA), som er realisert ved hjelp av Elementary Functions (EF). Informasjonsflyten mellom flere FE-er går via FEA-ene. SIBs are realized by a sequence of FEAs in an FE. For at en gruppe funksjonelle enheter skal kunne realisere en SIB må de ha de nødvendige egenskaper og kunne samarbeide.
+  4. Physical plane. Protokoller og prosessering som beskriver fordelingen av fysiske enheter i nettet. The FEs of the distributed functional plane are mapped to Physical Entities (PE). PEs communicate with each other by exchanging protocol messages (represented by information flows in the distributed functional plane). Describes the physical architecture alternatives for an IN-structured network in terms of potential physical systems, referred to as physical entities (PE), in a network, and interfaces between these PEs. The physical plane architecture describes how functional architecture map into Physical Entities and interfaces.
+* The IN’s main advantage is the ability to control switching and service execution from a small set of Intelligent Network nodes known as Service Control Points (SCP). SCPs are connected to the network switches (known as Service Switching Points (SSP)) via a standardized interface; Signalling System No. 7.
+* The SSPs detect when the SCP should handle a service. The SSP forwards a standardized SS7 (TCAP) message containing relevant service information. Via the TCAP message, the service control logic in the SCP directs the SSPs to perform the individual functions that collectively constitute the service.
+* An Intelligent Network is able to separate the specification, creation, and control of telephony services from physical switching networks.
+
+An IN-compliant service is first constructed through an FE called the Service Creation Environment Function (SCEF). This FE contains the programming environment, which includes the SIB that a programmer uses to construct an IN-compliant service. Once the service logic is created and tested, it is sent to another FE, the service management function (SMF). This FE deploys the service logic to the service execution FEs and allows for service customization. 
 
 Be familiar with and be able to describe the mode of operations for the most important IN physical and functional entities, including SSP, STP, SCP, SDP and SMF, and what IP indicates in this context/relation. 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+![PEs and FEs](pe-and-fe.png)
+
+Disse enhetene er stort sett forbundet ved hjelp av SS7-signalisering.
 
 ### Service Switching Function (SSF) or Service Switching Point (SSP)
 
 * Co-located with the telephone exchange itself, and acts as the trigger point for further services to be invoked during a call.
 * Implements the Basic Call State Machine (BCSM). 
 * As each state is traversed, the exchange encounters Detection Points (DPs) at which the SSP may invoke a query to the SCP to wait for further instructions on how to proceed. This query is usually called a trigger. Trigger criteria are defined by the operator and might include the subscriber calling number or the dialled number. The SSF is responsible for entertaining calls requiring value added services.
+* Innføring av nummerportabilitet gjør at man må konsultere enn database ved alle oppringninger, altså må man inn i IN ved hver oppringning.
 
 ### Service Control Function (SCF) or Service Control Point (SCP) 
 
@@ -61,6 +80,8 @@ Be familiar with and be able to describe the mode of operations for the most imp
 * The SCP contains service logic which implements the behaviour desired by the operator, i.e., the services. 
 * During service logic processing, additional data required to process the call may be obtained from the SDF. 
 * The logic on the SCP is created using the SCE.
+* Enhet som styrer tjenesten.
+* Inneholder tjenestestyringslogikk som avgjør hvordan en innkommende henvendelse skal tolkes, hvilke parametre som trenger å hentes inn gjennom oppslag i SDP, og hvordan den videre gang blir.
 
 ### Service Data Function (SDF) or Service Data Point (SDP) 
 
@@ -76,6 +97,24 @@ Be familiar with and be able to describe the mode of operations for the most imp
 ### Specialized Resource Function (SRF) or Intelligent Peripheral (IP) 
 
 * This is a node which can connect to both the SSP and the SCP and delivers additional special resources into the call, mostly related to voice data, for example play voice announcements or collect DTMF tones from the user.
+* Enhet utstyrt med tonesender/-mottaker, opptaker/avspiller for kunde- og systemgenererte meldinger.
+
+### Signal Transfer Point
+
+* Enhet/ruter for signaleringstrafikk. Fordeler signaleringstrafikken mot SCP på en hensiktsmessig måte.
+
+### Adjunct (AD)
+
+* Samme funksjonalitet som SCP, men betjener bare én sentral. Har ofte egen SDP, og er som oftest samlokalisert med en trafikksterk sentral.
+
+### Network Access Point (NAP)
+
+* Sentral uten IN-funksjoner.
+* Må benytte seg av SSP-utstyr i andre sentraler for å få tilknytning.
+
+### Service Node (SN)
+
+* Separat sammensatt node med en rekke funksjoner, satt sammen for å dekke lokalt behov. Stort sett samme funksjonalitet som en SSP, men ikke tilknyttet en sentral, altså kan den ikke behandle "normale" anrop.
 
 Know what Signalling System No 7 is and how it is used
 ------------------------------------------------------
