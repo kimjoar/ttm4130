@@ -154,6 +154,8 @@ Know what TMN is and what it is used for
 Know the meaning of Terminal Mobility, Person Mobility and Service Mobility. Describing mobility handling in the GSM- and IP-world included. 
 --------------------------------------------------------------------------------------------------------------------------------------------
 
+Mobility Management is one of the major functions of a GSM or a UMTS network that allows mobile phones to work. The aim of mobility management is to track where the subscribers are, so that calls, SMS and other mobile phone services can be delivered to them.
+
 * Terminalmobilitet: Terminalen kan bevege seg, mens tjenesten opprettholdes.
 * Brukermobilitet: Brukeren kan være hvor han vil. Adgang til tjenester uavhengig av hvilken fysisk terminal som brukes.
 * Sesjonsmobilitet: Kan beholde en aktiv sesjon, selv om terminal byttes.
@@ -162,22 +164,67 @@ Know the meaning of Terminal Mobility, Person Mobility and Service Mobility. Des
 * Rollemobilitet: Flere roller/profiler. "Jeg vil være en person på jobb og en annen hjemme."
 * Kontinuerlig mobilitet: Avbruddsfri tilgang på tjenester selv under flytting/bevegelse.
 * Diskret mobilitet: Tjeneste avbrytes under flytting, men taes opp igjen etterpå. Kan f.eks. har kontinuerlig mobilitet innenfor et gitt dekningsområde, og diskret mobilitet mellom dekningsområder.
+* Mobilitet medfører at man tar meg seg /flytter ressurser eller en forbindelse fra et sted i nettet til et annet.  Har da behov for entydig identifisering av terminalen i det nye nettet. I tillegg trenger man autorisasjon for å ta i bruk ressurser i det nye nettet. Og det trengs en rengskapsfunksjon som grunnlag for betaling. => AAA (Authentication, Authorization, Accouting)
 
-Mobilitet medfører at man tar meg seg /flytter ressurser eller en forbindelse fra et sted i nettet til et annet.  Har da behov for entydig identifisering av terminalen i det nye nettet. I tillegg trenger man autorisasjon for å ta i bruk ressurser i det nye nettet. Og det trengs en rengskapsfunksjon som grunnlag for betaling. => AAA (Authentication, Authorization, Accouting)
+### Mobilitetshåndtering i GSM
+
+* Kan sees på som terminalmobilitet, men SIM-kortet kan flyttes til en ny terminal. => Brukermobilitet.
+* Handover, kontunuerlig mobilitet. ...
+* Home Location Register (HLR, abonnentregister) inneholder informasjon om tjenester det kan abonneres på, abonnentets status, og oppdatert oppholdsplass for abonnenten, altså hvilket Visiting Location Register (VLR, oppholdsregister) bruker er i.
+* Roaming = En bruker kan bevege seg på tvers av operatørområder. Roaming is defined as the ability for a cellular customer to automatically make and receive voice calls, send and receive data, or access other services, including home data services, when travelling outside the geographical coverage area of the home network, by means of using a visited network.
+* Terminalen scanner kontinuerlig området den befinner seg i, og rapporterer signalstyrke og andre data til BSC (Base Station Controller), som tar avgjørelsen om handover. Hard handover.
+
+![Location updating procedure in GSM](location-update-gsm.png)
+
+### Mobilitetshåndtering i IP
+
+* Ligner GSM, men det heter Home Agent (HA) og Foreign Agent (FA) istedetfor hhv HLR og VLR. HA og FA er samplassert med lokale rutere.
+* Nomade betegner en mobil vertsmaskin.
+* Korrespondent brukes som betegnelse på en vertsmaskin som kommuniserer med nomaden.
+* Dersom nomaden flyttes til et nytt område (et annet subnett), må den først registrere seg for FA. Adressen til FA finnes ved å lytte til Agent Announcements. Dersom det finnes en egnet FA, kan registreringen finne sted. FA oppdaterer HA om ny posisjon. Trafikk vil kapsles inn av HA, som sender det videre til FA, som pakker ut datagrammet og presenterer det i eget subnett med nomadens fast IP-adresse som destinasjon (tunnelering).
+* Registrering hos FA har som regel en endelig varighet, og må fornyes, og dette er nomadens plikt å ha oversikt over.
+* Trafikk til nomaden vil alltid rutes via HA.
+
+#### IPv6
+
+* Tilstandsløs tilordning: Tillater en nomade å selv finne seg en IP "care of"-adresse på et nytt sted. De siste 48 bit i en autokonfigurert adresse vil være lik ethernet-adressen til vertsmaskinen. Dette betyr at også Network Point of Attachment (NPA) er kjent. Vertsmaskinen kan så melde sin "care of"-adresse til egen HA gjennom en Binding Update-melding. Den virker da som sin egen FA.
+* Ruteoptimalisering gir korresponderende node mulighet til å cache nomadens c/o-adresse, og triangulær ruting kan da unngås. 
+
+### Mobilitetshåndtering i SIP
+
+* Roaming:
+  * Pre-call:
+    * Nomade kan finne SIP-tjener via multicast REGISTER.
+    * Nomade kan få IP-adresse av DHCP.
+    * Nomade oppdaterer egen hjemmeserver og lokasjonstjener.
+  * Mid-call:
+    * Nomade oppnår ny IP-adresse (eks via DHCP), og sender ny INVITE eller RE-INVITE til korrespondent, med ny adresse og oppdatert sesjonsbeskrivelse.
+
+![Ruteoptimalisering](optimize-route.png)
 
 Be able to describe what AAA means and where these functions are used. To be able to give a simple explanation/characterization of the protocols Radius and Diameter 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ### Authentication
 
-* Fysisk adgang
-* Terminalidentitet
+* Fysisk adgang. Tradisjonell fasttelefoni.
+* Terminalidentitet. NMT.
 * Passord/PIN-kode
+* Biometrisk data
+* Flyttbart identitetskort. Brukes i GSM (SIM) og UMTS (USIM).
 
 ### Authorization
 
 ### Accounting
 
+Ideelt sett skal et system som medfører betaling for kunden også kunne produsere nøyaktig faktureringsgrunnlag. Kan kreve identifikasjon i flere trinn, f.eks. ved adgang til tilleggstjenester.
+
+Noen begreper:
+
+* Accountning (regnskap): Prosessen som fordeler belastningen mellom hjemmeoperatør, nettet som brukes og brukeren selv.
+* Charging (belastning): Funksjon som omformer og overfører informasjon om betalbare hendelser slik at man etablerer et underlag for regning til brukeren.
+* CDR (Charging Data Record): Kostnadsregistrering generert av nettelement for å gi underlag for regning.
+* Billing: Gjør underlag basert på CDR-er til regninger, og utsteder disse.
 
 Be able to describe what a Meta Protocol is and how the use of such protocols are intended (with reference to ETSIs TIPHON standards and consecutive standards). 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -211,11 +258,55 @@ Be able to account for network and conceptual architecture for next generation n
 Be able to describe the VoIP architecture: SIP (SIP proper)
 -----------------------------------------------------------
 
+* Session Initiation Protocol (SIP) er designet for å sette opp sesjoner i Internett.
+* SIP brukes primært for styring (signalering) av selve oppsettet, men kan også benyttes for å gjøre endringer i sesjonen mens den pågår.
+* Anvendelsområder:
+  * Lokalisering av bruker (Aksessnettet hvor brukeren befinner seg)
+  * Brukertilgjengelighet
+  * Brukerprofil
+  * Oppsetting av sesjon
+  * Sesjonsadministrasjon
+* SIP beskriver selve arkitekturen for signaleringssystemet, men Session Description Protocol (SDP) benyttes for å beskrive innhold i signaleringsmeldingene. SIP frakter altså ikke mediainnhold mellom brukere, men er en signaleringsprotokoll.
+* Artikekturen består i hovedsak av fire typer identiteter:
+  * SIP brukeragent.
+  * SIP proxy-tjener.
+  * DNS.
+  * Lokasjonstjener.
+* Abonnenten får tildelt en identitet, i form av en SIP Uniform Resource Indicator (URI), som har samme form som en email-adresse.
+* Alt utstyr som kan bruke IP/UDP kan være SIP brukeragent.
+* Registreringsfunksjonen i SIP kan være lagt til en proxy-tjener. Dersom den legges til egen tjener kalles denne Registrar. En registrar vil normalt skrive resultatet av registreringen i en location server, og virker som en slags HLR i GSM.
+* SIP is a permanent element of the IP Multimedia Subsystem (IMS) architecture for IP-based streaming multimedia services in cellular systems.
+
+![Nett-elementer som inngår i SIP](sip-entities.png)
+
 SIP: Be able to describe the following concepts and their function: Proxy, Redirect Server, Registrar, User Client, SDP
 -----------------------------------------------------------------------------------------------------------------------
 
 Be able to describe how SIP is intended integrated in 3GPP/UMTS
 ---------------------------------------------------------------
+
+* 3GPP-konsortiet baserer seg på SIP for oppsetting.
+* I 3GPP benyttes SIP som utgangspunkt for å håndtere multimedieanrop.
+* CSCF = Call Session Control Function (sesjonskontroll)
+* User Equipment (UE) er en SIP brukeragent som betjenes av Proxy-CSCF (P-CSCF), som igjen kommuniserer med Serving-CSCF (S-CSCF). I 3GPP er det S-CSCF som styrer og vedlikeholder et tilstandsbilde for sesjonen. Dette skjer altså i hjemmenettet til abonnenten.
+* P-CSCF
+  * Er UEs første kontaktpunkt. 
+  * Fungerer som en vanlig proxy, og kan videresende forespørsler på vegne av en bruker. 
+  * Skal kunne generere CDR-er, vedlikeholde sikker kommunikasjon mellom seg og UE, utføre meldingskompresjon og -dekompresjon, samt å ta seg av autorisering av bærer-ressurser og QoS-administrasjon.
+* Interrogating-CSCF (I-CSCF)
+  * Kontaktpunkt mot en operatørs nett for alle forbindelser som ankommer til brukere hos denne operatøren, og til gjestebrukere som oppholder seg i området. 
+  * En operatør kan ha flere I-CSCF-er. Er en slags grensevakt. 
+  * Finner adressen til S-CSCF ved hjelp av Home Subscriber Server (HSS). 
+  * Tilordner S-CSCF til en bruker som utfører SIP-registrering. 
+  * Ruter SIP-forespørsler mottatt fra andre nett til egnet S-CSCF i eget nett. 
+  * Genererer CDR-er.
+  * Nettoperatør trenger ikke benytte seg av I-CSCF, men fordelen er at man kan gjemme vekk opplysninger om den indre strukturen i nettet.
+* S-CSCF
+  * Betjener bruker under sesjonen.
+  * Utfører styring av sesjonen på vegne av UE.
+  * Innenfore en operatørs nett kan forskjellige S-CSCF-er ha forskjellig funksjonalitet.
+
+![Omgivelser for SIP-basert tjenestestyring i UMPS IP-basert multimediakjernenett](sip-environment.png)
 
 Be able to describe the underlying idea/purpose of PARLAY/OSA and how it is realized
 ------------------------------------------------------------------------------------
