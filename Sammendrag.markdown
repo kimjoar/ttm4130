@@ -268,18 +268,115 @@ A subnetwork, or subnet, describes networked computers and devices that have a c
 * Adressefelt på 128 bit
 * Tre typer adresser:
   * Unikast. Identifiserer et enkelt grensesnitt, og pakker med en unikast-adresse blir levert til denne adressen. Kan kalles *gitt mottaker*.
-  * Anykast. Identifiserer et sett med grensesnitt, vanligvis tilhørende forskjellige noder i nettet. Pakker med anykast-adresse skal leveres til *én* av de aktuelle grensesnittene.
+  * Anykast. Identifiserer et sett med grensesnitt, vanligvis tilhørende forskjellige noder i nettet. Pakker med anykast-adresse skal leveres til *én* av de aktuelle grensesnittene. An anycast address is a single address assigned to multiple nodes. Delivers to the "nearest" one, according to the routing protocols' measure of distance.
   * Multikast. Identifiserer et sett med grensesnitt, vanligvis tilhørende forskjellige noder i nettet. Pakker med multikast-adresse skal leveres til *alle* aktuelle grensesnitt. Et gitt grensesnitt kan være medlem av et virkårlig antall multikast-grupper. 
 * I IPv6 blir adressene tilordnet grensesnitt, ikke noder. 
+* Addresses are assigned to interfaces, and a single network host or node can have multiple interfaces, or a single interface with multiple addresses.
 
 ![Adressetyper i IPv6](ipv6-address-types.png)
 
-* Spesielle adresser:
-  * Uspesifisert. Must never be assigned to an interface and is to be used only in software before the application has learned its host's source address appropriate for a pending connection.
-  * Loopback. Kan anvendes for å sende IP-pakker til seg selv. Skal normalt ikke nå fysisk nettgrensesnitt. Corresponding to 127.0.0.1 in IPv4.
-  * Linklokal unikast. Skal aldri bli videresendt til en annen link. Blir brukt under automatisk konfigurering av adresser.
-  * Global unikast.
-  * Multikast. Designates multicast addresses.
+#### Uspesifisert
+
+Must never be assigned to an interface and is to be used only in software before the application has learned its host's source address appropriate for a pending connection.
+
+#### Loopback
+
+Kan anvendes for å sende IP-pakker til seg selv. Skal normalt ikke nå fysisk nettgrensesnitt. Corresponding to 127.0.0.1 in IPv4.
+
+#### Linklokal unikast
+
+Skal aldri bli videresendt til en annen link. Link-Local addresses are designed to be used for addressing on a single link for purposes such as automatic address configuration, neighbor discovery, or when no routers are present. All interfaces are required to have at least one Link-Local unicast address.
+
+<pre>
+| 10 bits  |         54 bits         |          64 bits           |
++----------+-------------------------+----------------------------+
+|1111111010|           0             |       interface ID         |
++----------+-------------------------+----------------------------+
+</pre>
+
+#### Global unikast
+
+Conventional, publicly routable address, just like conventional IPv4 publicly routable addresses. => Alt annet enn det som er spesifisert i tabellen. Anycast addresses are taken from the unicast address spaces.
+
+<pre>
+|         n bits         |   m bits  |       128-n-m bits         |
++------------------------+-----------+----------------------------+
+| global routing prefix  | subnet ID |       interface ID         |
++------------------------+-----------+----------------------------+
+</pre>
+
+#### Anykast
+
+Anycast addresses are allocated from the unicast address space, using any of the defined unicast address formats.
+
+#### Multikast
+
+An IPv6 multicast address is an identifier for a group of interfaces (typically on different nodes).  An interface may belong to any number of multicast groups.
+   
+<pre>
+|   8    |  4 |  4 |                  112 bits                   |
++------ -+----+----+---------------------------------------------+
+|11111111|flgs|scop|                  group ID                   |
++--------+----+----+---------------------------------------------+
+</pre>
+
+De tre første bit i flags skal settes til 0, men det siste bit-et, T, indikerer om scope er transient. T = 0 indicates a permanently-assigned ("well-known") multicast address, assigned by the Internet Assigned Numbers Authority (IANA). T = 1 indicates a non-permanently-assigned ("transient" or "dynamically" assigned) multicast address.
+
+scop is a 4-bit multicast scope value used to limit the scope of the multicast group.  The values are as follows:
+
+<pre>
+0  reserved
+1  Interface-Local scope
+2  Link-Local scope
+3  reserved
+4  Admin-Local scope
+5  Site-Local scope
+6  (unassigned)
+7  (unassigned)
+8  Organization-Local scope
+9  (unassigned)
+A  (unassigned)
+B  (unassigned)
+C  (unassigned)
+D  (unassigned)
+E  Global scope
+F  reserved
+</pre>
+
+* Interface-Local scope spans only a single interface on a node and is useful only for loopback transmission of multicast.
+* Link-Local multicast scope spans the same topological region as the corresponding unicast scope.
+* Admin-Local scope is the smallest scope that must be administratively configured, i.e., not automatically derived from physical connectivity or other, non-multicast-related configuration.
+* Site-Local scope is intended to span a single site.
+* Organization-Local scope is intended to span multiple sites belonging to a single organization.
+* scopes labeled "(unassigned)" are available for administrators to define additional multicast regions.
+
+<pre>
+All Nodes Addresses:    FF01:0:0:0:0:0:0:1 (interface-local)
+                        FF02:0:0:0:0:0:0:1 (link-local)
+All Routers Addresses:  FF01:0:0:0:0:0:0:2 (interface-local)
+                        FF02:0:0:0:0:0:0:2 (link-local)
+                        FF05:0:0:0:0:0:0:2 (site-local)
+Solicited-Node Address: FF02:0:0:0:0:1:FFXX:XXXX
+</pre>
+
+Solicited-Node multicast address are computed as a function of a node's unicast and anycast addresses.  A Solicited-Node multicast address is formed by taking the low-order 24 bits of an address (unicast or anycast) and appending those bits to the prefix FF02:0:0:0:0:1:FF00::/104. Denne adresseformen brukes når en node skal "henge seg på" en eller flere multikastgrupper.
+
+A host is required to recognize the following addresses as identifying itself:
+
+* Its required Link-Local address for each interface.
+* Any additional Unicast and Anycast addresses that have been configured for the node's interfaces (manually or automatically).
+* The loopback address.
+* The All-Nodes multicast addresses.
+* The Solicited-Node multicast address for each of its unicast and
+anycast addresses.
+* Multicast addresses of all other groups to which the node
+belongs.
+
+A router is required to recognize all addresses that a host is required to recognize, plus the following addresses as identifying itself:
+
+* The Subnet-Router Anycast addresses for all interfaces for which it is configured to act as a router.
+* All other Anycast addresses with which the router has been configured.
+* The All-Routers multicast addresses.
 
 Know what is meant by resource discovery and be familiar with some examples
 ---------------------------------------------------------------------------
