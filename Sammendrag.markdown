@@ -378,8 +378,66 @@ A router is required to recognize all addresses that a host is required to recog
 * All other Anycast addresses with which the router has been configured.
 * The All-Routers multicast addresses.
 
+### Interface Identifiers
+
+Interface identifiers in IPv6 unicast addresses are used to identify interfaces on a link. They are required to be unique within a subnet prefix.
+
+* Links or Nodes with IEEE EUI-64 Identifiers: The only change needed to transform an IEEE EUI-64 identifier to an interface identifier is to invert the "u" (universal/local) bit.
+* Links or Nodes with IEEE 802 48-bit MACs: Create an IEEE EUI-64 identifier from an IEEE 48-bit MAC identifier by inserting two octets, with hexadecimal values of 0xFF and 0xFE, in the middle of the 48-bit MAC (between the company_id and vendor-supplied id).
+
+### Telefonnummer
+
+### GSM og UMTS
+
+* IMSI (International Mobile Subscriber Identity). Identifikator som brukes internt, blant annet til identifikasjon av mobilterminal i radiostyringssystemet for å kunne starte registrering i et besøksområde, fastlegge hjemmenettet til en besøkende mobilterminal/bruker, identifisere terminal/bruker når opplysninger angående tjenester for brukeren utveksles mellom nettene, og identifikasjon av terminal/bruker med hensyn på avregning. Mobil landkode (MCC, 3 siffer) + Nettoperatør (MNC, 2 eller 3 siffer) + Abonnentidentitet (MSIN) = max 15 siffer.
+* TMSI (Temporary Mobile Subscriber Identity). Temporær identitet tilordnet av VLR eller SGSN (P-TMSI), som må kunne relateres til aktuell UEs eller MS' (mobile station) IMSI.
+* TLLI (Temporary Logical Link Identity). Signalling address for communication between the MS (Mobile Station) and the SGSN. 
+* MSISDN (Mobile Station International PSTN/ISDN Number). The standard international telephone number used to identify a given subscriber.
+* MSRN (Mobile Station Roaming Number). Temporært anropsnummer som er tildelt MS på besøksplassen. MSISDN brukes til å finne HLR, der man får adgang til MSRN, slik at anropet kan rutes til besøkende MSC. 
+* MSIDN (Mobile Station International Data Number). 
+* Handover Number. Blir brukt til å etablere kobling mellom MSC-er i forbindelse med handover. Samme form som MSRN.
+* IMEI (International Mobile Equipment Identifier). Unique identifier allocated to each ME (Mobile Equipment). It consists of a TAC (Type Approval Code, 8 siffers), SNR (Serial Number,  6 siffers) and a Spare Digit.
+* LAI (Location Area Identification). Uniquely identifies a LA (Location Area) within any PLMN (Public Land Mobile Network). It is comprised of the MCC (Mobile Country Code, 3 digits), MNC (Mobile Network Code, 2 or 3 digits) and the LAC (Location Area Code, 2 octets).
+* RAI (Routing Area Identity). Composed of the LAC (Location Area Code) and the RAC (Routing Area Code). It is used for paging and registration purposes.
+* CI (Cell Identity) & CGI (Cell Group Identity). Under en gitt basestasjon kan man bruke en gitt celle. A 16bit identifier in GSM and UMTS. When combined with the LAI (Location Area Identity) or RAI (Routing Area Identity) the result is termed the CGI (Cell Global Identity).
+* BSIC (Base Station Identity Code). For at en MS skal kunne holde rede på basestasjonene i nærheten, gis disse sin spesifikke identifikasjon. 
+
+### Internett
+
+* URI = Uniform Resource Identifier. Consists of a string of characters used to identify or name a resource on the Internet. Such identification enables interaction with representations of the resource over a network, typically the World Wide Web, using specific protocols. URIs are defined in schemes specifying a specific syntax and associated protocols.
+* URL = Uniform Resource Locator. A type of URI that specifies where an identified resource is available and the mechanism for retrieving it.
+* URN = Uniform Resource Name. A URI that uses the urn scheme, and does not imply availability of the identified resource.
+
+A Uniform Resource Name (URN) functions like a person's name, while a Uniform Resource Locator (URL) resembles that person's street address. The URN defines an item's identity, while the URL provides a method for finding it.
+
+NAI is a standard way of identifying users who request access to a network. Globalt navnerom for brukeridentiteter på formen <brukernavn>@<domenenavn>. Kan grovt si at NAI har samme funksjon i Internett som IMSI i UMTS/GSM.
+
+I fremtidige IP-baserte Multimediakjernenett (IMCN) opererer man med tre typer IP-adresser eller identiteter:
+
+1. Privat brukeridentitet. Tilordnes av hjemmeoperatøren og brukes for all håndtering av abonnement og regninger. Vil blant annet bli larget i HSS, og funnet av og mellomlagret i S-CSCF under registrering.
+2. Offentlig brukeridentitet. Den gyldige "anropsidentiteten". Skal ha form som en SIP URL eller eventuelt foreligge i "tel:"-URL-formatet.
+3. Temporær offentlig brukeridentitet. 
+
+![Forhold mellom private og offentlige brukeridentiteter](nai-user-identities.png)
+
+CSCF-, BGCF- og MGCF-noder skal kunne identifiseres ved hjelp av gyldige SIP URL-er over de grensesnitt som støtter SIP-protokollen.
+
 Know what is meant by resource discovery and be familiar with some examples
 ---------------------------------------------------------------------------
+
+Ressursavdekking er en funksjon som tillatter terminalen eller brukeren å oppdage eler kartlegge tilgjengelige ressurser. Ethvert system som gir støtte for flyttbare enheter bør/må ha implementert en eller annen metodikk for ressursavdekking, og etterfølgende konfigurering. 
+
+To løsningsmåter:
+
+* Ressursene annonserer sin tilstedeværelse ved kringkasting eller multicast på mediet (med jevne mellomrom).
+* Ved å etterspørre ressursene. Enklest kan dette gjøres når ressursene har fått "velkjente" adresser som kan benyttes for å nå dem.
+
+### Neighbour discovery, IPv6
+
+* Nodes (hosts and routers) use Neighbor Discovery to determine the link-layer addresses for neighbors known to reside on attached links and to quickly purge cached values that become invalid.  Hosts also use Neighbor Discovery to find neighboring routers that are willing to forward packets on their behalf.  Finally, nodes use the protocol to actively keep track of which neighbors are reachable and which are not, and to detect changed link-layer addresses.  When a router or the path to a router fails, a host actively searches for functioning alternates.
+* Alle noder trenger å kjenne til minst én ruter, som kan formidle pakker til andre maskinter som ikke befinner seg på samme lokalnett.
+
+#### RDF
 
 Be able to account for network and conceptual architecture for next generation networks (TISPAN/NGN-ETSI and IMS) 
 -----------------------------------------------------------------------------------------------------------------
