@@ -10,12 +10,12 @@ Know the difference between access network, transport network and service platfo
 
 * Et moderne kommunikasjonssystem består av et aksessnett og et kjernenett, der kjernenettet gjerne deles i to nivåer, tjenesteplattform og transportnett.
 * I transportnettet formidles nytteinformasjon, "budskapet", mellom deltagerne.
-* Tjenesteplattformen blir anvednt for oppsetning, styring og kontroll av transportstrømmene.
+* Tjenesteplattformen blir anvendt for oppsetning, styring og kontroll av transportstrømmene.
 * Utviklingen av tjenesteplattformen har kulminert i IN, som standardiserer funksjoner i tjenestestyringslaget.
-* An access network is that part of a communications network which connects subscribers to their immediate service provider. 
+* An access network is that part of a communications network which connects subscribers to their immediate service provider (tjenesteleverandør). 
 * Det eksisterer to hovedutgaver av tjenesterealiseringsnett i Europa:
-  * Intelligent Networks.
-  * GSM-tjenesteplattform.
+  * Intelligent Networks
+  * GSM-tjenesteplattform
 * Både IN- og GSM-rammeverket er uenget når mobile brukere ønsker integrering av webbaserte tjenester med vanlig telefoni, med fokus på multimedia-innhold.
 
 Be familiar with modeling of a normal telephone calls states, and how to illustrate this by state descriptions and sequence diagrams
@@ -23,16 +23,16 @@ Be familiar with modeling of a normal telephone calls states, and how to illustr
 
 Vanskelig å få tilgang til terminaltilstanden til en telefon direkte, og overvåker derfor samtaletilstanden:
 
-* SBCP (Subscriber Basic Call Process)
-* TBCP (Transit Basic Call Process)
+* SBCP (Subscriber Basic Call Process). Ligger i endesentralene.
+* TBCP (Transit Basic Call Process). Ligger i transittsentralene, tilsluttet hver enkelt inngang.
 
 Realiseres i form av tilstandsmaskiner. Hver enkelt abonnentlinje må ha sin egen tilstandsmaskin.
 
-Minst tre forskjellige nivåer av informasjon:
+Minst tre forskjellige nivåer av informasjon for å overvåke tilstanden i nettet:
 
-* Nettets driftstilstand, inklusive den enkelte komponent
-* Rutingtabeller
-* Den enkelte forbindelse eller oppkobling
+* Nettets driftstilstand, inklusive den enkelte komponent.
+* Rutingtabeller.
+* Den enkelte forbindelse eller oppkobling.
 
 Be familiar with the Intelligent Network architecture
 -----------------------------------------------------
@@ -44,14 +44,15 @@ Be familiar with the Intelligent Network architecture
 * IN is based on the Signaling System #7 (SS7) protocol between telephone network switching centers and other network nodes owned by network operators.
 * The main concepts (functional view) surrounding IN services or architecture are connected with SS7 architecture.
 * IN er et distribuert system for tjenestestyring.
+* IN has not replaced the existing PSTN; rather, it has been overlaid onto it.
 * The standards define a complete architecture including the architectural view, state machines, physical implementation and protocols. 
 * Before IN was developed, all new feature and/or services that were to be added had to be implemented directly in the core switch systems. This made for very long release cycles as the bug hunting and testing had to be extensive and thorough to prevent the network from failing. With the advent of IN, most of these services were moved out of the core switch systems and into self serving nodes (IN), thus creating a modular and more secure network that allowed the services providers themselves to develop variations and value-added services to their network without submitting a request to the core switch manufacturer and wait for the long development process.
 * IN kan grovt sett sees som en tjenesteplattform som "utvider" transportnettet.
 * Konseptuell modell i fire nivåer/plan. Each plane introduces an abstract view of the network entities, which is further made tangible in the plane below it. Tolkes top/down:
   1. Service plane. Abstrakt spesifikasjonslag. Tjenester beskrives ved hjelp av generelle blokker kalt Service Features (SF). En tjeneste er et selvstendig kommersielt tilbud, og en tjenesteegenskap (SF) beskriver et spesielt aspekt ved en tjeneste. Tjeneste og funksjoner realiseres ved hjelp av funksjoner fra nest øverste plan, såkalte Service Independent Blocks (SIB).
   2. Global functional plane. Delt i to deler. 
-    * Global tjenestelogikk som styrer instanser av SIB-er. Samlingen av disse representerer et bibliotek som kan anvendes til å realisere tjenester. Tjenestelogikken spesifiserer hvordan et utvalg av slik funksjonalitet skal manøvreres for å skape en tjeneste. The SIBs are reusable components that can be chained together to construct a service logic. En enkelt SIB er en prosess som kan motta data, deretter prosessere denne, for så å overlevere til neste trini i kjeden.
-    * ... Basic Call Processing (BCP) er et særtilfelle av en SIB. Utførelsen av en tjeneste starter og ender i BCP.
+     * Global tjenestelogikk som styrer instanser av SIB-er. Samlingen av disse representerer et bibliotek som kan anvendes til å realisere tjenester. Tjenestelogikken spesifiserer hvordan et utvalg av slik funksjonalitet skal manøvreres for å skape en tjeneste. The SIBs are reusable components that can be chained together to construct a service logic. En enkelt SIB er en prosess som kan motta data, deretter prosessere denne, for så å overlevere til neste trinn i i kjeden.
+     * ... Basic Call Processing (BCP) er et særtilfelle av en SIB. Utførelsen av en tjeneste starter og ender i BCP.
   3. Distributed functional plane. Inneholder en beskrivelse av hvordan SIB-funksjonalitet skapes ved hjelp av Functional Entities (FE). FE-kan distribueres i nettet, men én enkelt FE kan ikke distribueres. Altså kan FE-ene til én SIB være distribuert. Hver FE må utføre en Functional Entity Action (FEA), som er realisert ved hjelp av Elementary Functions (EF). Informasjonsflyten mellom flere FE-er går via FEA-ene. SIBs are realized by a sequence of FEAs in an FE. For at en gruppe funksjonelle enheter skal kunne realisere en SIB må de ha de nødvendige egenskaper og kunne samarbeide.
   4. Physical plane. Protokoller og prosessering som beskriver fordelingen av fysiske enheter i nettet. The FEs of the distributed functional plane are mapped to Physical Entities (PE). PEs communicate with each other by exchanging protocol messages (represented by information flows in the distributed functional plane). Describes the physical architecture alternatives for an IN-structured network in terms of potential physical systems, referred to as physical entities (PE), in a network, and interfaces between these PEs. The physical plane architecture describes how functional architecture map into Physical Entities and interfaces.
 * The IN’s main advantage is the ability to control switching and service execution from a small set of Intelligent Network nodes known as Service Control Points (SCP). SCPs are connected to the network switches (known as Service Switching Points (SSP)) via a standardized interface; Signalling System No. 7.
@@ -59,6 +60,11 @@ Be familiar with the Intelligent Network architecture
 * An Intelligent Network is able to separate the specification, creation, and control of telephony services from physical switching networks.
 
 An IN-compliant service is first constructed through an FE called the Service Creation Environment Function (SCEF). This FE contains the programming environment, which includes the SIB that a programmer uses to construct an IN-compliant service. Once the service logic is created and tested, it is sent to another FE, the service management function (SMF). This FE deploys the service logic to the service execution FEs and allows for service customization. 
+
+![Konseptuell IN-modell](in-conceptual-model.png)
+![Konseptuell IN-modell](in-conceptual-model-2.gif)
+![Nettverksarkitektur IN](in-network-architecture.gif)
+![Funksjonelle enheter](in-distributed-functional-plane-model.png)
 
 Be familiar with and be able to describe the mode of operations for the most important IN physical and functional entities, including SSP, STP, SCP, SDP and SMF, and what IP indicates in this context/relation. 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -85,6 +91,7 @@ Disse enhetene er stort sett forbundet ved hjelp av SS7-signalisering.
 * The SSP contains Detection Capability to detect requests for IN services. It also contains capabilities to communicate with other PEs containing SCF, such as SCP, and to respond to instructions from the other PEs.
 * In case of external Service Data Point (SDP) the SCF can access data through a signalling network.
 * The SDP may be in the same network as the SCP, or in another network.
+* SCF styrer prosessering av anropet ved henvendelser med IN-støttede funksjoner og/eller henvendelser fra bruker.
 
 ### Service Data Function (SDF) or Service Data Point (SDP) 
 
@@ -205,6 +212,20 @@ Mobility Management is one of the major functions of a GSM or a UMTS network tha
 Be able to describe what AAA means and where these functions are used. To be able to give a simple explanation/characterization of the protocols Radius and Diameter 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+* Disse funksjonene blir viktigere etterhvert som den enkelte terminal og bruker tillates å operere i mange forskjellige nett, samt bruke et rikt tjenesteutvalg supplert fra mange leverandører.
+* Autentisering og autorisering kreves ofte flere ganger, f.eks. for å bli registrert som bruker/abonnement, for å få nettadgang, og for å bruke et bestemt tjenesteutvalg.
+* Vertikal -> horisontal integrasjon. Stor betydning med riktig utforming av AAA-funksjonalitet.
+* To viktige fora for fastlegging: 3GPP som spesifiserer fremtidens mobilnett, og IETFS arbeidsgrupper for AA og Mobile IP.
+* Terminologi:
+  * Adminstrativt område: Samling av nettverk, datamaskinter og databaser under en felles administrasjon.
+  * Betjening: Funksjonalitet som realiserer tjenestegrensesnittet mellom klienten og lokaldomenet.
+  * Portvakt: Enhet som styrer/kontrollerer klientens adgang til nettet.
+  * Avregning/Billing: Sette sammen og utstede faktura/regning.
+  * Megler: Tiltrodd mellommann med tillit fra minst to andre AAA-tjenere, og som er i stand til å oppnå og yte sikringstjenester fra disse AAA-tjenerne.
+  * Fremmeddomene: Administrativt domene besøkt av mobil IP-klient. 
+  * Regnskapsføring/Accounting: Funksjonen å samle sammen informasjon om ressursbruk for senere bruk i trendanalyser, revisjon, fakturering eller fordeling av kostnader.
+  * CDR (Charging Data Record): Kostnadsregistrering generert av nettelement for å gi underlag for regning.
+
 ### Authentication
 
 * Fysisk adgang. Tradisjonell fasttelefoni.
@@ -217,14 +238,43 @@ Be able to describe what AAA means and where these functions are used. To be abl
 
 ### Accounting
 
-Ideelt sett skal et system som medfører betaling for kunden også kunne produsere nøyaktig faktureringsgrunnlag. Kan kreve identifikasjon i flere trinn, f.eks. ved adgang til tilleggstjenester.
+* Viktig element for å overvåke normal drift.
+* Ideelt sett skal et system som medfører betaling for kunden også kunne produsere nøyaktig faktureringsgrunnlag. Kan kreve identifikasjon i flere trinn, f.eks. ved adgang til tilleggstjenester.
 
-Noen begreper:
+### Basismodell
 
-* Accountning (regnskap): Prosessen som fordeler belastningen mellom hjemmeoperatør, nettet som brukes og brukeren selv.
-* Charging (belastning): Funksjon som omformer og overfører informasjon om betalbare hendelser slik at man etablerer et underlag for regning til brukeren.
-* CDR (Charging Data Record): Kostnadsregistrering generert av nettelement for å gi underlag for regning.
-* Billing: Gjør underlag basert på CDR-er til regninger, og utsteder disse.
+![AAA-tjenere i hjemme- og lokaldomenet.](aaa-local-home-domain.png)
+
+* Betjeningsnoden (NAS/FA/B) har ofte ikke direkte adgang til data som trengs for å sluttføre transaksjonen. Konsulterer da en autoritet, som vanligvis ligger i det samme administrative domenet, for å skaffe seg bevis for at klienten har akseptable fullmakter.
+* Siden betjeningsnoden og den lokale autoritet tilhører samme administrative domene antas det at de har etablert, eller er i stand til å etablere, en sikker kanal som tillater utveksling av informasjon relatert til adgangskontroll.
+* Når lokal autoritet ikke har nok informasjon til å verifisere klientens fullmakter forutsettes det at AAAL kan forhandle seg fram til verifikasjon ved hjelp av eksterne autoriteter.
+* Det kan være mange betjeningsnoder i hvert administrative domene
+* Enhver lokal betjeningsnode bør ha en sikkerhetsrelasjon med den lokale AAA-tjener (AAAL)
+* Lokal autoritet må dele, eller dynamisk etablere, sikkerhetsrelasjoner med eksterne autoriteter som er i stand til å sjekke klientfullmakter.
+* Betjeningsnoden må kunne holde rede på tilstand for klientforespørsler mens lokal autoritet kontakter passende ekstern autoritet.
+* Siden den mobile node ikke nødvendigvis starter sin karriere med å være tilstede i eget hjemmedomene må den være i stand til å bringe tilveie fullstendinge og ufalskbare fullmakter uten noen gang å ha vært i kontakt med hjemmedomenet.
+* Siden den mobile nodes fullmakter må holdes ufalskbare må ikke mellomliggende noder være i stand til å lære noe som setter dem i stand til å rekonstruere og gjenbruke fullmakter.
+* En betjeningsnode må kunne håndtere forespørsler fra mange klienter samtidig.
+* Betjeningsnoden må være beskyttet mot replay attacks.
+* Digitale sertifikater bør kunne fraktes i en AAA-melding, og AAA-infrastruktur bør også kunne assistere med hensyn på validering av fullmakter, slik at fremmedagenten og hjemmeagenten blir avlastet.
+* Støtte for regnskapsføring.
+* Krav relatert til IP-operasjon:
+  * Enhver AAA-tjener må være i stand til å tilordne passende IP-adresser på forespørsel fra klient.
+  * AAA-tjener må være i stand til å identifisere klienten også ved hjelp av andre hjelpemidler enn IP-adresse.
+* Mobil IP(v4):
+  * Betjeningsnode = Fremmedagent.
+  * AAAH og HA trenger ikke tilhøre samme domene, eksempelvis kan AAAH-tjeneren tilhøre et spesialdomene for et kredittkortfirma.
+  * For mobil IP får AAAH og AAAL følgende tilleggsoppgaver:
+    * Reautentisering av mobile enheter
+    * Autorisasjon av mobil node
+    * Initiering av regnskapsfunksjoner for å registrere bruk av tjenester
+    * Bruk av AAA-protokoll extensions for å inkludere Mobile IP registreringsmelding som del av den første registreringssekvens.
+
+((Se nærmere på IPv6, s 144 ->))
+
+### Radius
+
+
 
 Be able to describe what a Meta Protocol is and how the use of such protocols are intended (with reference to ETSIs TIPHON standards and consecutive standards). 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -240,6 +290,55 @@ definere utvidelser til den eksisterende metaprotokollen eller mangler ved den v
 
 Be able to give a review on problems concerning interworking between traditional and IP-based telecommunication networks. 
 -------------------------------------------------------------------------------------------------------------------------
+
+Hovedproblemstillingen er samdrift mellom et IP-nett og SCN. Men også mange andre problemstillinger. Blant annet ønsker man å beskytte tidligere investeringer, og kunne ha en gradvis eller trinnvis overgang fra GSM til UMTS, og en gradvis overgang fra en infrastruktur basert på linjesvitsjing til en infrastruktur basert på pakkesvitsjing. 
+
+To former for samdrift:
+* Samdrift av styringssystem, altså samvirke mellom IN-basert styringslogikk og internettbaserte styringssystemer.
+* Samdrift av styringssystem og samband, altså sammenkobling av IP-baserte og CS-baserte samtaleveier.
+
+### Samdrift av styringssystem
+
+* IETF tok opp problemet med samvirke mellom IN-tjenester i det offentlige telefonnetter (PSTN) og IP-nettet i arbeidsgruppen PINT (PSTN/Internet Interfaces).
+* PINT adresser "anrop" eller initiering fra internettsiden mot PSTN. Formålet er i hovedsak å kunne tilby telefontjenester initiert ved klikk på en webside.
+* Fokus:
+  * Klikk for å ringe opp
+  * Klikk for å fakse
+  * Klikk for å få faks tilbake
+  * Taletilgang til webtjenester
+* Arbeid videreført i SPIRITS (Service in the PSTN/IN Requesting Internet Service), som ser på initiering fra PSTN mot internett.
+* Komplekst system. Startet derfor med arbeidet med å få til en full samdrift mellom IP-telefoni og PSTN. => Gateways.
+
+### Samdrift av styringssystem og samband
+
+* Neste generasjons nett (NGN) er forutsatt å være et IP-basert tjenesteintegrert nett, med mekanismer for differensiert styring av tjenestekvalitet.
+* 5 scenarier for samvirke:
+  1. IP-nett til IP-nett (ikke samvirke, ren NGN)
+  2. IP-nett til CSN
+  3. CSN til IP-nett
+  4. CSN til CSN via IP-nett
+  5. IP-nett til IP-nett via CSN
+* For de scenarier en starter i ett type nett og ender i en annen må man
+  * konvertere adresseformater (eks IP -> E.164).
+  * konvertere mellom forskjellige signaleringsprotokoller/-systemer.
+  * konvertere mellom forskjellige transportprotokoller (eks. linjesvitsjing til TCP/IP).
+  * konvertere fra en type kildekoding til en annen.
+* Må finne ut hvor eventuelle overgangsenheter (Interworking Function, IWF) er plassert.
+* Ang scenariene:
+  * (2) Det kan det rent økonomisk være lurt å gå over så sent som mulig, men eventuell dårlig tjenestekvalitet i nettet kan betinge en tidligere overgang.
+  * (4,5) åpner for løsning der man oppretter en tunnet gjennom transittnettet. Dersom man skal tunnelere IP-telefoni gjennom PSTN/CSN må man passe på å sikre seg mot transkoding underveis, siden flere nett komprimerer talesignaler for å øke antall tilgjengelige samband på en strekning. Man må ha en ren digital, linjesvitsjet forbindelse.
+  * (3) Hvordan oversette E.164-nummer til IP-adresser?
+  * (3) Hvordan betjene nomadiske IP-brukere?
+  * (4) IP-strekningen introduserer en økt og variabel tidsforsinkelse.
+  * (2-5) Oppsetning av rene to-parts telefoniforbindelser kan løses relativt enkelt, men multimedie-sesjoner på tvers av CS- og PS-domenet kan by på større problemer.
+
+![PINT referansemodell](pint-reference.png)
+
+### IMS
+
+It is desirable for the IMS to interwork with legacy CS networks. This requires interworking both at the user plane and the control plane. Control plane interworking is tasked to the MGCF, while the IMS-MGW translates protocols at the user plane.
+
+(Fig 3.23 og 3.24, s 95 IMS)
 
 Be able to account for the most employed addressing and number systems within communication
 -------------------------------------------------------------------------------------------
@@ -436,8 +535,33 @@ To løsningsmåter:
 
 * Nodes (hosts and routers) use Neighbor Discovery to determine the link-layer addresses for neighbors known to reside on attached links and to quickly purge cached values that become invalid.  Hosts also use Neighbor Discovery to find neighboring routers that are willing to forward packets on their behalf.  Finally, nodes use the protocol to actively keep track of which neighbors are reachable and which are not, and to detect changed link-layer addresses.  When a router or the path to a router fails, a host actively searches for functioning alternates.
 * Alle noder trenger å kjenne til minst én ruter, som kan formidle pakker til andre maskinter som ikke befinner seg på samme lokalnett.
+* Funksjoner:
+  * Avdekking av rutere tilknyttet samme link.
+  * Avdekking av prefiks som spesifiserer mottakere på samme link.
+  * Parameteravdekking, f.eks. MTU (maksimal overføringsenhet målt i oktetter) og grense for antall hopp.
+  * Selvkonfigurering av adresse.
+  * Linkadresseoppslag. Hvordan bestemme linklagsadresse til en mottaker på samme link når bare IP-adressen er kjent.
+  * Bestemmelse av neste hopp.
+  * Deteksjon av nabo som ikke kan nåes.
+  * Deteksjon av adressedubletter.
+  * Omdirigering.
+* Meldingstyper:
+  * Ruterforespørring. Når et grensesnitt blir aktivert kan en vertsmaskin sende en slik melding for å trigge øyeblikkelig ruterannonsering.
+  * Ruterannonsering. Enten perodisk eller på forespørsel. 
+  * Naboforespørring. Sendes ut for å få kjennskap til linklagsadressen til en nabo, for å verifisere at naboen fortsatt kan nåes ved hjelp av en cachet linklagsadresse, eller for å sjekke om det eksiterer adressedubletter.
+  * Naboannonsering. 
+  * Omruting.
+* Naboavdekkingsprotokollen har egentlig Ethernet, linklaget, som hovedreferanse. En linklagsadresse er i den sammenhegn en IEEE 802-basert MAC-adresse. Naboavdekking foregår på samme link.
+* De fleste meldingene vil bli sendt med en MAC-adresse
+* Linklag:
+  * Multikast. A link that supports a native mechanism at the link layer for sending packets to all or a subset of all neighbors.
+  * Punkt-til-punkt. A link that connects exactly two interfaces. A point-to-point link is assumed to have multicast capability and have a link-local address.
+  * Multiaksess. A link to which more than two interfaces can attach, but that does not support a native form of multicast or broadcast.
+* Hop Limit = 255. Slik kan vi sikre oss mot at pakken er videresendt av en ruter, siden ruteren dekrementerer verdien med 1 for hver videresending.
 
 #### RDF
+
+(s. 131 ->)
 
 Be able to account for network and conceptual architecture for next generation networks (TISPAN/NGN-ETSI and IMS) 
 -----------------------------------------------------------------------------------------------------------------
