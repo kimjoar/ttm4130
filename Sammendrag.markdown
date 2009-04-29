@@ -131,14 +131,14 @@ Disse enhetene er stort sett forbundet ved hjelp av SS7-signalisering.
 Know what Signalling System No 7 is and how it is used
 ------------------------------------------------------
 
-* To typer signalering:
-  1. Channel Associated Signaling. With CAS signaling, this routing information is encoded and transmitted in the same channel as the payload itself.
-  2. Common Channel Signaling. With CCS signaling information (control information) is transmitted on a separate channel to the data, and, more specifically, where that signaling channel controls multiple data channels.
 * SS7 er et felleskanalsystem (CCS)
 * Signaling System Number 7 (SS7) is a set of telephony signaling protocols which are used to set up most of the world's public switched telephone network telephone calls. 
 * The main purpose is to set up and tear down telephone calls. Other uses include number translation, prepaid billing mechanisms, short message service (SMS), and a variety of other mass market services.
 * SS7 skaper språket og kommunikasjonssystemet for å overføre meldinger, men det trengs enheter i nettet som tolker disse meldingene og reagerer på hensiktsmessig måte.
 * The term signalling, when used in telephony, refers to the exchange of control information associated with the establishment of a telephone call on a telecommunications circuit.
+* To typer signalering:
+  1. Channel Associated Signaling. With CAS signaling, this routing information is encoded and transmitted in the same channel as the payload itself.
+  2. Common Channel Signaling. With CCS signaling information (control information) is transmitted on a separate channel to the data, and, more specifically, where that signaling channel controls multiple data channels.
 * The path and facility used by the signalling is separate and distinct from the telecommunications channels that will ultimately carry the telephone conversation.
 * SS7, being a high-speed and high-performance packet-based communications protocol, can communicate significant amounts of information when setting up a call, during the call, and at the end of the call. This permits rich call-related services to be developed.
 * Due to its richness and the need for a completely separate signalling network for its operation, SS7 signalling is mostly used for signalling between telephone switches and not for signalling between local exchanges and Customer Premise Equipment (CPE).
@@ -150,6 +150,13 @@ Know what Signalling System No 7 is and how it is used
   * User part. Består av ISDN User Part, Telephone User Part, og Signaling Connection Control Part og Transaction Capabilities Application Part. Er brukere av MTP.
 * SS7 kan brukes til å sammenbinde mange slags kommunikasjonssystemer.
 * Stream Control Transmission Protocol (SCTP) is a Transport Layer protocol, serving in a similar role as the popular protocols Transmission Control Protocol (TCP) and User Datagram Protocol (UDP). Indeed, it provides some of the same service features of both, ensuring reliable, in-sequence transport of messages with congestion control.
+* The Message Transfer Part (MTP) is divided into three levels:
+  1. Equivalent to the OSI Physical Layer. Defines the physical, electrical, and functional characteristics of the digital signaling link.
+  2. Equivalent to the OSI Data Link Layer. Ensures accurate end-to-end transmission of a message across a signaling link. Implements flow control, message sequence validation, and error checking.
+  3. Equivalent to the OSI Network Layer. Provides message routing between signaling points in the SS7 network. Re-routes traffic away from failed links and signaling points and controls traffic when congestion occurs. 
+* ISDN User Part (ISUP). Defines the protocol used to set-up, manage, and release trunk circuits that carry voice and data between terminating line exchanges.
+* Signaling Connection Control Part (SCCP). Provides connectionless and connection-oriented network services.
+* Transaction Capabilities Applications Part (TCAP). Supports the exchange of non-circuit related data between applications across the SS7 network using the SCCP connectionless service. Queries and responses sent between SSPs and SCPs are carried in TCAP messages.
 
 ![Comparison of transport layers](comparison-transport-layer.png)
 
@@ -648,6 +655,8 @@ Be able to describe the underlying idea/purpose of PARLAY/OSA and how it is real
 
 Be able to describe the philosophy behind/principles of “stateless network control” and why it is desirable to implement a service logic mainly based on this principle
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Vil man egentlig ha _kun_ et stupid network? Begge deler har sine positive og negative sider. Reliability, Accounting og QoS er fortsatt bedre i intelligente nett, mens det er mye raskere å innføre nye tjenester i dumme nettverk, samt at ...
 
 Know what a Media Gateway and a Media Gateway Controller is/does
 ----------------------------------------------------------------
