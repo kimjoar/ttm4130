@@ -61,15 +61,15 @@ Be familiar with the Intelligent Network architecture
 
 An IN-compliant service is first constructed through an FE called the Service Creation Environment Function (SCEF). This FE contains the programming environment, which includes the SIB that a programmer uses to construct an IN-compliant service. Once the service logic is created and tested, it is sent to another FE, the service management function (SMF). This FE deploys the service logic to the service execution FEs and allows for service customization. 
 
-![Konseptuell IN-modell](in-conceptual-model.png)
-![Konseptuell IN-modell](in-conceptual-model-2.gif)
-![Nettverksarkitektur IN](in-network-architecture.gif)
-![Funksjonelle enheter](in-distributed-functional-plane-model.png)
+![Konseptuell IN-modell](http://github.com/kjbekkelund/ttm4130/blob/master/in-conceptual-model.png)
+![Konseptuell IN-modell](http://github.com/kjbekkelund/ttm4130/blob/master/in-conceptual-model-2.gif)
+![Nettverksarkitektur IN](http://github.com/kjbekkelund/ttm4130/blob/master/in-network-architecture.gif)
+![Funksjonelle enheter](http://github.com/kjbekkelund/ttm4130/blob/master/in-distributed-functional-plane-model.png)
 
 Be familiar with and be able to describe the mode of operations for the most important IN physical and functional entities, including SSP, STP, SCP, SDP and SMF, and what IP indicates in this context/relation. 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-![PEs and FEs](pe-and-fe.png)
+![PEs and FEs](http://github.com/kjbekkelund/ttm4130/blob/master/pe-and-fe.png)
 
 Disse enhetene er stort sett forbundet ved hjelp av SS7-signalisering.
 
@@ -158,7 +158,7 @@ Know what Signalling System No 7 is and how it is used
 * Signaling Connection Control Part (SCCP). Provides connectionless and connection-oriented network services.
 * Transaction Capabilities Applications Part (TCAP). Supports the exchange of non-circuit related data between applications across the SS7 network using the SCCP connectionless service. Queries and responses sent between SSPs and SCPs are carried in TCAP messages.
 
-![Comparison of transport layers](comparison-transport-layer.png)
+![Comparison of transport layers](http://github.com/kjbekkelund/ttm4130/blob/master/comparison-transport-layer.png)
 
 Know what TMN is and what it is used for
 ----------------------------------------
@@ -188,7 +188,7 @@ Mobility Management is one of the major functions of a GSM or a UMTS network tha
 * Roaming = En bruker kan bevege seg på tvers av operatørområder. Roaming is defined as the ability for a cellular customer to automatically make and receive voice calls, send and receive data, or access other services, including home data services, when travelling outside the geographical coverage area of the home network, by means of using a visited network.
 * Terminalen scanner kontinuerlig området den befinner seg i, og rapporterer signalstyrke og andre data til BSC (Base Station Controller), som tar avgjørelsen om handover. Hard handover.
 
-![Location updating procedure in GSM](location-update-gsm.png)
+![Location updating procedure in GSM](http://github.com/kjbekkelund/ttm4130/blob/master/location-update-gsm.png)
 
 ### Mobilitetshåndtering i IP
 
@@ -214,7 +214,7 @@ Mobility Management is one of the major functions of a GSM or a UMTS network tha
   * Mid-call:
     * Nomade oppnår ny IP-adresse (eks via DHCP), og sender ny INVITE eller RE-INVITE til korrespondent, med ny adresse og oppdatert sesjonsbeskrivelse.
 
-![Ruteoptimalisering](optimize-route.png)
+![Ruteoptimalisering](http://github.com/kjbekkelund/ttm4130/blob/master/optimize-route.png)
 
 Be able to describe what AAA means and where these functions are used. To be able to give a simple explanation/characterization of the protocols Radius and Diameter 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -250,7 +250,7 @@ Be able to describe what AAA means and where these functions are used. To be abl
 
 ### Basismodell
 
-![AAA-tjenere i hjemme- og lokaldomenet.](aaa-local-home-domain.png)
+![AAA-tjenere i hjemme- og lokaldomenet.](http://github.com/kjbekkelund/ttm4130/blob/master/aaa-local-home-domain.png)
 
 * Betjeningsnoden (NAS/FA/B) har ofte ikke direkte adgang til data som trengs for å sluttføre transaksjonen. Konsulterer da en autoritet, som vanligvis ligger i det samme administrative domenet, for å skaffe seg bevis for at klienten har akseptable fullmakter.
 * Siden betjeningsnoden og den lokale autoritet tilhører samme administrative domene antas det at de har etablert, eller er i stand til å etablere, en sikker kanal som tillater utveksling av informasjon relatert til adgangskontroll.
@@ -293,7 +293,7 @@ definere utvidelser til den eksisterende metaprotokollen eller mangler ved den v
 * TIPHON-metaprotokollen definerer en funksjonalitet på applikasjonslagesnivå som omfatter en mengde applikasjoner som anses som nøvendige i neste generasjons telefoni. Metaprotokollen består av tilstandsmaskiner som kan utføre anropsbehandling/sesjonsstyring.
 * Grunnlaget for metaprotokollen er den abstrakte arkitekturen i TISPAN, som definerer funksjonelle lag, referansepunkt og grensesnitt mellom funksjonelle lag. Et funksjonelt lag utfører spesielle sett av oppgaver.
 
-![Samvirke definert ved hjelp av metaprotokoll](meta-protocol.png)
+![Samvirke definert ved hjelp av metaprotokoll](http://github.com/kjbekkelund/ttm4130/blob/master/meta-protocol.png)
 
 Be able to give a review on problems concerning interworking between traditional and IP-based telecommunication networks. 
 -------------------------------------------------------------------------------------------------------------------------
@@ -339,7 +339,7 @@ To former for samdrift:
   * (4) IP-strekningen introduserer en økt og variabel tidsforsinkelse.
   * (2-5) Oppsetning av rene to-parts telefoniforbindelser kan løses relativt enkelt, men multimedie-sesjoner på tvers av CS- og PS-domenet kan by på større problemer.
 
-![PINT referansemodell](pint-reference.png)
+![PINT referansemodell](http://github.com/kjbekkelund/ttm4130/blob/master/pint-reference.png)
 
 ### IMS
 
@@ -365,7 +365,7 @@ Be able to account for the most employed addressing and number systems within co
 * Alle vertsmaskiner må ha minst en autorativ navnetjener.
 * Because of the huge volume of requests generated by a system like DNS, the designers wished to provide a mechanism to reduce the load on individual DNS servers. To this end, the DNS resolution process allows for caching.
 
-![Iterativt DNS-oppslag](dns-lookup.png)
+![Iterativt DNS-oppslag](http://github.com/kjbekkelund/ttm4130/blob/master/dns-lookup.png)
 
 ### IPv6
 
@@ -379,7 +379,7 @@ A subnetwork, or subnet, describes networked computers and devices that have a c
 * I IPv6 blir adressene tilordnet grensesnitt, ikke noder. 
 * Addresses are assigned to interfaces, and a single network host or node can have multiple interfaces, or a single interface with multiple addresses.
 
-![Adressetyper i IPv6](ipv6-address-types.png)
+![Adressetyper i IPv6](http://github.com/kjbekkelund/ttm4130/blob/master/ipv6-address-types.png)
 
 #### Uspesifisert
 
@@ -524,7 +524,7 @@ I fremtidige IP-baserte Multimediakjernenett (IMCN) opererer man med tre typer I
 2. Offentlig brukeridentitet. Den gyldige "anropsidentiteten". Skal ha form som en SIP URL eller eventuelt foreligge i "tel:"-URL-formatet.
 3. Temporær offentlig brukeridentitet. 
 
-![Forhold mellom private og offentlige brukeridentiteter](nai-user-identities.png)
+![Forhold mellom private og offentlige brukeridentiteter](http://github.com/kjbekkelund/ttm4130/blob/master/nai-user-identities.png)
 
 CSCF-, BGCF- og MGCF-noder skal kunne identifiseres ved hjelp av gyldige SIP URL-er over de grensesnitt som støtter SIP-protokollen.
 
@@ -600,7 +600,7 @@ Be able to describe the VoIP architecture: SIP (SIP proper)
 * Registreringsfunksjonen i SIP kan være lagt til en proxy-tjener. Dersom den legges til egen tjener kalles denne Registrar. En registrar vil normalt skrive resultatet av registreringen i en location server, og virker som en slags HLR i GSM.
 * SIP is a permanent element of the IP Multimedia Subsystem (IMS) architecture for IP-based streaming multimedia services in cellular systems.
 
-![Nett-elementer som inngår i SIP](sip-entities.png)
+![Nett-elementer som inngår i SIP](http://github.com/kjbekkelund/ttm4130/blob/master/sip-entities.png)
 
 SIP: Be able to describe the following concepts and their function: Proxy, Redirect Server, Registrar, User Client, SDP
 -----------------------------------------------------------------------------------------------------------------------
@@ -648,7 +648,7 @@ Be able to describe how SIP is intended integrated in 3GPP/UMTS
 * En basissesjon mellom en bruker i UMTS-multimedienett og et punkt i PSTN involverer én S-CSCF for UE-en, én BGCF for å velge PSTN-gateway, og én MGCF for styring av mediekonvertering via a vis PSTN.
 * S-CSCF tilsvarer CCAF i IN, den er grensen mellom bruker og oppsetning i nettet.
 
-![Omgivelser for SIP-basert tjenestestyring i UMPS IP-basert multimediakjernenett](sip-environment.png)
+![Omgivelser for SIP-basert tjenestestyring i UMPS IP-basert multimediakjernenett](http://github.com/kjbekkelund/ttm4130/blob/master/sip-environment.png)
 
 Be able to describe the underlying idea/purpose of PARLAY/OSA and how it is realized
 ------------------------------------------------------------------------------------
