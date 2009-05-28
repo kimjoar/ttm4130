@@ -8,8 +8,10 @@ Sammendraget er basert på læringsmålene i faget, og tar utgangspunkt i fagets
 Know the difference between access network, transport network and service platform/IN
 -------------------------------------------------------------------------------------
 
+![Grov oppdeling av nettet](http://github.com/kjbekkelund/ttm4130/raw/master/oppdeling.png)
+
 * Et moderne kommunikasjonssystem består av et aksessnett og et kjernenett, der kjernenettet gjerne deles i to nivåer, tjenesteplattform og transportnett.
-* I transportnettet formidles nytteinformasjon, "budskapet", mellom deltagerne.
+* Transportnett: Formidler nytteinformasjon, "budskapet", mellom deltagerne.
 * Tjenesteplattformen blir anvendt for oppsetning, styring og kontroll av transportstrømmene.
 * Utviklingen av tjenesteplattformen har kulminert i IN, som standardiserer funksjoner i tjenestestyringslaget.
 * An access network is that part of a communications network which connects subscribers to their immediate service provider (tjenesteleverandør). 
@@ -17,6 +19,16 @@ Know the difference between access network, transport network and service platfo
   * Intelligent Networks
   * GSM-tjenesteplattform
 * Både IN- og GSM-rammeverket er uenget når mobile brukere ønsker integrering av webbaserte tjenester med vanlig telefoni, med fokus på multimedia-innhold.
+
+### Lagdelt arkitektur
+
+* Lagdelt ut fra det "nivå" funksjonen har.
+* Alminnelig telefonnett: Transportnett som er tidsmultiplekset og realiserer Nett, Link og Fysisk lag. Circuit-switched. Digitalt.
+
+### NGN
+
+* Generisk rammemodell
+* Sammensmelte fastnett, mobilnett og internett.
 
 Be familiar with modeling of a normal telephone calls states, and how to illustrate this by state descriptions and sequence diagrams
 ------------------------------------------------------------------------------------------------------------------------------------
@@ -28,38 +40,56 @@ Vanskelig å få tilgang til terminaltilstanden til en telefon direkte, og overv
 
 Realiseres i form av tilstandsmaskiner. Hver enkelt abonnentlinje må ha sin egen tilstandsmaskin.
 
+![Tilstandsmaskiner](http://github.com/kjbekkelund/ttm4130/raw/master/tilstandsmaskiner.png)
+
 Minst tre forskjellige nivåer av informasjon for å overvåke tilstanden i nettet:
 
 * Nettets driftstilstand, inklusive den enkelte komponent.
 * Rutingtabeller.
 * Den enkelte forbindelse eller oppkobling.
 
+Sentrale aspekter:
+
+* Weak coupling
+* Interfaces
+* Weak synchronization
+* Autonomous fault recovery
+
 Be familiar with the Intelligent Network architecture
 -----------------------------------------------------
 
-* The term Intelligent Networks (IN) is used to describe an architectural concept which is intended to be applicable to all telecommunications networks and aims to ease the introduction and management of new services.
-* With IN technology it is possible to introduce new services rapidly without affecting the available services. IN defines a large set of standards that describe the interfaces between different network control points. With only specifying the interfaces IN makes it possible for vendor systems to provide with different products and, of course, for operators to use any of these products in their network configuration.
-* The Intelligent Network is a network architecture intended both for fixed as well as mobile telecom networks. It allows operators to differentiate themselves by providing value-added services in addition to the standard telecom services such as PSTN, ISDN and GSM services on mobile phones.
-* In IN, the intelligence is provided by network nodes owned by telecom operators, as opposed to solutions based on intelligence in the telephone equipment, or in Internet servers provided by any part.
-* IN is based on the Signaling System #7 (SS7) protocol between telephone network switching centers and other network nodes owned by network operators.
+* IN = Architectural concept intended to be applicable to all telecommunications networks and aims to ease the introduction and management of new services.
+* With IN technology it is possible to introduce new services rapidly without affecting the available services. IN defines a large set of standards that describe the interfaces between different network control points. With only specifying the interfaces IN makes it possible for vendor systems to provide with different products and for operators to use any of these products in their network configuration.
+* Beskriver interfacene mellom forskjellige nettverkskontrollpunkt => Leverandøruavhengig.
+* Intended both for fixed as well as mobile telecom networks. Allows operators to differentiate themselves by providing value-added services in addition to the standard telecom services such as PSTN, ISDN and GSM services on mobile phones.
+* The intelligence is provided by network nodes owned by telecom operators, as opposed to solutions based on intelligence in the telephone equipment, or in Internet servers provided by any part.
+* Flytter kompleksiteten fra sentralene.
+* Based on the Signaling System #7 (SS7) protocol between telephone network switching centers and other network nodes owned by network operators.
 * The main concepts (functional view) surrounding IN services or architecture are connected with SS7 architecture.
-* IN er et distribuert system for tjenestestyring.
+* Distribuert system for tjenestestyring.
 * IN has not replaced the existing PSTN; rather, it has been overlaid onto it.
 * The standards define a complete architecture including the architectural view, state machines, physical implementation and protocols. 
 * Before IN was developed, all new feature and/or services that were to be added had to be implemented directly in the core switch systems. This made for very long release cycles as the bug hunting and testing had to be extensive and thorough to prevent the network from failing. With the advent of IN, most of these services were moved out of the core switch systems and into self serving nodes (IN), thus creating a modular and more secure network that allowed the services providers themselves to develop variations and value-added services to their network without submitting a request to the core switch manufacturer and wait for the long development process.
 * IN kan grovt sett sees som en tjenesteplattform som "utvider" transportnettet.
-* Konseptuell modell i fire nivåer/plan. Each plane introduces an abstract view of the network entities, which is further made tangible in the plane below it. Tolkes top/down:
-  1. Service plane. Abstrakt spesifikasjonslag. Tjenester beskrives ved hjelp av generelle blokker kalt Service Features (SF). En tjeneste er et selvstendig kommersielt tilbud, og en tjenesteegenskap (SF) beskriver et spesielt aspekt ved en tjeneste. Tjeneste og funksjoner realiseres ved hjelp av funksjoner fra nest øverste plan, såkalte Service Independent Blocks (SIB).
-  2. Global functional plane. Delt i to deler. 
-     * Global tjenestelogikk som styrer instanser av SIB-er. Samlingen av disse representerer et bibliotek som kan anvendes til å realisere tjenester. Tjenestelogikken spesifiserer hvordan et utvalg av slik funksjonalitet skal manøvreres for å skape en tjeneste. The SIBs are reusable components that can be chained together to construct a service logic. En enkelt SIB er en prosess som kan motta data, deretter prosessere denne, for så å overlevere til neste trinn i i kjeden.
-     * ... Basic Call Processing (BCP) er et særtilfelle av en SIB. Utførelsen av en tjeneste starter og ender i BCP.
-  3. Distributed functional plane. Inneholder en beskrivelse av hvordan SIB-funksjonalitet skapes ved hjelp av Functional Entities (FE). FE-kan distribueres i nettet, men én enkelt FE kan ikke distribueres. Altså kan FE-ene til én SIB være distribuert. Hver FE må utføre en Functional Entity Action (FEA), som er realisert ved hjelp av Elementary Functions (EF). Informasjonsflyten mellom flere FE-er går via FEA-ene. SIBs are realized by a sequence of FEAs in an FE. For at en gruppe funksjonelle enheter skal kunne realisere en SIB må de ha de nødvendige egenskaper og kunne samarbeide.
-  4. Physical plane. Protokoller og prosessering som beskriver fordelingen av fysiske enheter i nettet. The FEs of the distributed functional plane are mapped to Physical Entities (PE). PEs communicate with each other by exchanging protocol messages (represented by information flows in the distributed functional plane). Describes the physical architecture alternatives for an IN-structured network in terms of potential physical systems, referred to as physical entities (PE), in a network, and interfaces between these PEs. The physical plane architecture describes how functional architecture map into Physical Entities and interfaces.
 * The IN’s main advantage is the ability to control switching and service execution from a small set of Intelligent Network nodes known as Service Control Points (SCP). SCPs are connected to the network switches (known as Service Switching Points (SSP)) via a standardized interface; Signalling System No. 7.
 * The SSPs detect when the SCP should handle a service. The SSP forwards a standardized SS7 (TCAP) message containing relevant service information. Via the TCAP message, the service control logic in the SCP directs the SSPs to perform the individual functions that collectively constitute the service.
 * An Intelligent Network is able to separate the specification, creation, and control of telephony services from physical switching networks.
 
 An IN-compliant service is first constructed through an FE called the Service Creation Environment Function (SCEF). This FE contains the programming environment, which includes the SIB that a programmer uses to construct an IN-compliant service. Once the service logic is created and tested, it is sent to another FE, the service management function (SMF). This FE deploys the service logic to the service execution FEs and allows for service customization. 
+
+### Konseptuell modell
+
+Konseptuell modell i fire nivåer/plan. Each plane introduces an abstract view of the network entities, which is further made tangible in the plane below it. Tolkes top/down:
+
+1. Service plane. Abstrakt spesifikasjonslag. Tjenester beskrives ved hjelp av generelle blokker kalt Service Features (SF). En tjeneste er et selvstendig kommersielt tilbud, og en tjenesteegenskap (SF) beskriver et spesielt aspekt ved en tjeneste. Tjeneste og funksjoner realiseres ved hjelp av funksjoner fra nest øverste plan, såkalte Service Independent Blocks (SIB).
+2. Global functional plane. 
+   * Modellerer et IN-nettverk som én enkel entitet. 
+   * Tjenester identifisert i Service Plane er dekomponert til SF-er, og så mappet på en eller flere SIB-er. 
+   * Global tjenestelogikk som styrer instanser av SIB-er. Samlingen av disse representerer et bibliotek som kan anvendes til å realisere tjenester. Tjenestelogikken spesifiserer hvordan et utvalg av slik funksjonalitet skal manøvreres for å skape en tjeneste. 
+   * The SIBs are reusable components that can be chained together to construct a service logic. En enkelt SIB er en prosess som kan motta data, prosessere denne, og overlevere til neste trinn i i kjeden. 
+   * Basic Call Processing (BCP) er et særtilfelle av en SIB. Utførelsen av en tjeneste starter og ender i BCP. Alltid en Point of Initiation (POI), mens det kan være flere Point of Return (POR). MEN: kun én POR per utførelse. Tenk if-else.
+3. Distributed functional plane. Inneholder en beskrivelse av hvordan SIB-funksjonalitet skapes ved hjelp av Functional Entities (FE). FE-kan distribueres i nettet, men én enkelt FE kan ikke distribueres. Altså kan FE-ene til én SIB være distribuert. Hver FE må utføre en Functional Entity Action (FEA), som er realisert ved hjelp av Elementary Functions (EF). Informasjonsflyten mellom flere FE-er går via FEA-ene. SIBs are realized by a sequence of FEAs in an FE. For at en gruppe funksjonelle enheter skal kunne realisere en SIB må de ha de nødvendige egenskaper og kunne samarbeide.
+4. Physical plane. Protokoller og prosessering som beskriver fordelingen av fysiske enheter i nettet. The FEs of the distributed functional plane are mapped to Physical Entities (PE). PEs communicate with each other by exchanging protocol messages (represented by information flows in the distributed functional plane). Describes the physical architecture alternatives for an IN-structured network in terms of potential physical systems, referred to as physical entities (PE), in a network, and interfaces between these PEs. The physical plane architecture describes how functional architecture map into Physical Entities and interfaces.
 
 ![Konseptuell IN-modell](http://github.com/kjbekkelund/ttm4130/raw/master/in-conceptual-model.png)
 ![Konseptuell IN-modell](http://github.com/kjbekkelund/ttm4130/raw/master/in-conceptual-model-2.gif)
@@ -131,8 +161,8 @@ Disse enhetene er stort sett forbundet ved hjelp av SS7-signalisering.
 Know what Signalling System No 7 is and how it is used
 ------------------------------------------------------
 
-* SS7 er et felleskanalsystem (CCS)
-* Signaling System Number 7 (SS7) is a set of telephony signaling protocols which are used to set up most of the world's public switched telephone network telephone calls. 
+* SS7 er et felleskanalsystem
+* Signaling System Number 7 (SS7) is a set of telephony signaling **protocols** which are used to set up most of the world's public switched telephone network telephone calls. 
 * The main purpose is to set up and tear down telephone calls. Other uses include number translation, prepaid billing mechanisms, short message service (SMS), and a variety of other mass market services.
 * SS7 skaper språket og kommunikasjonssystemet for å overføre meldinger, men det trengs enheter i nettet som tolker disse meldingene og reagerer på hensiktsmessig måte.
 * The term signalling, when used in telephony, refers to the exchange of control information associated with the establishment of a telephone call on a telecommunications circuit.
@@ -147,7 +177,7 @@ Know what Signalling System No 7 is and how it is used
 * SS7 skreddersyr rutiner helt fra fysisk lag og opp.
 * To deler:
   * Message transfer part. Beskriver virkemåte for fysisk lag, linklag og nettverkslag. MTP sørger for at informasjonen fra UP blir transportert pålitelig på tvers av SS7-nettet. Connectionless. For tredje generasjons mobilnett erstattes MTP med IPv6, og lager i den forbindelse Stream Control Transport Protocol (SCTP), siden hverken TCP eller UDP har nok støttefunksjoner.
-  * User part. Består av ISDN User Part, Telephone User Part, og Signaling Connection Control Part og Transaction Capabilities Application Part. Er brukere av MTP.
+  * User part. Består av ISDN User Part, Mobile User Part, Telephone User Part, Signaling Connection Control Part og Transaction Capabilities Application Part. Er brukere av MTP.
 * SS7 kan brukes til å sammenbinde mange slags kommunikasjonssystemer.
 * Stream Control Transmission Protocol (SCTP) is a Transport Layer protocol, serving in a similar role as the popular protocols Transmission Control Protocol (TCP) and User Datagram Protocol (UDP). Indeed, it provides some of the same service features of both, ensuring reliable, in-sequence transport of messages with congestion control.
 * The Message Transfer Part (MTP) is divided into three levels:
@@ -158,37 +188,110 @@ Know what Signalling System No 7 is and how it is used
 * Signaling Connection Control Part (SCCP). Provides connectionless and connection-oriented network services.
 * Transaction Capabilities Applications Part (TCAP). Supports the exchange of non-circuit related data between applications across the SS7 network using the SCCP connectionless service. Queries and responses sent between SSPs and SCPs are carried in TCAP messages.
 
+![SS7 arkitektur](http://github.com/kjbekkelund/ttm4130/raw/master/ss7-architecture.png)
 ![Comparison of transport layers](http://github.com/kjbekkelund/ttm4130/raw/master/comparison-transport-layer.png)
+
+### Signaleringssystemer i IP-nett
+
+* SIP. Basis for call control in 3GPP.
+* H.323. Multimedia communication over LAN.
 
 Know what TMN is and what it is used for
 ----------------------------------------
 
-(Telecommunications Management Network? s21)
+TMN = Telecommunication Management Network.
+
+* Elektronisk drifts- og overvåkningssystem.
+* Separat administrativt system. Logisk adskilt fra de systemer som blir administrert.
+* Benytter vanligvis separate datalinjer/linker fram til det enkelte nett-element.
+* Definerer MIB (Management Information Base)-elementer for hver nettverksenhet som skal styres.
+* En del av administrasjonsplanet. Lag:
+  * Forretningsdrift
+  * Tjenester
+  * Nett
+  * Nettelementer
 
 Know the meaning of Terminal Mobility, Person Mobility and Service Mobility. Describing mobility handling in the GSM- and IP-world included. 
 --------------------------------------------------------------------------------------------------------------------------------------------
 
 Mobility Management is one of the major functions of a GSM or a UMTS network that allows mobile phones to work. The aim of mobility management is to track where the subscribers are, so that calls, SMS and other mobile phone services can be delivered to them.
 
-* Terminalmobilitet: Terminalen kan bevege seg, mens tjenesten opprettholdes.
-* Brukermobilitet: Brukeren kan være hvor han vil. Adgang til tjenester uavhengig av hvilken fysisk terminal som brukes.
-* Sesjonsmobilitet: Kan beholde en aktiv sesjon, selv om terminal byttes.
-* Tjenestemobilitet: Programvaremodler kan overføres fra en maskin til en annen.
-* Personmobilitet: Tillatter en person å benytte tjenester som er tilpasset egne preferanser og abonnenter uavhengig av fysisk plassering og spesielt utstyr.
-* Rollemobilitet: Flere roller/profiler. "Jeg vil være en person på jobb og en annen hjemme."
 * Kontinuerlig mobilitet: Avbruddsfri tilgang på tjenester selv under flytting/bevegelse.
 * Diskret mobilitet: Tjeneste avbrytes under flytting, men taes opp igjen etterpå. Kan f.eks. har kontinuerlig mobilitet innenfor et gitt dekningsområde, og diskret mobilitet mellom dekningsområder.
 * Mobilitet medfører at man tar meg seg /flytter ressurser eller en forbindelse fra et sted i nettet til et annet.  Har da behov for entydig identifisering av terminalen i det nye nettet. I tillegg trenger man autorisasjon for å ta i bruk ressurser i det nye nettet. Og det trengs en rengskapsfunksjon som grunnlag for betaling. => AAA (Authentication, Authorization, Accouting)
 
+Mobilitet handler om å være mobil, ikke trådløs.
+
+<table>
+  <tr>
+    <th></th>
+    <th>LN</th>
+    <th>NGN</th>
+  </tr>
+  <tr>
+    <th>Terminal</th>
+    <td>Tjeneste opprettholdes, terminal skifter posisjon.</td>
+    <td>1) Kunnne fysisk flytte en terminal. 2) Mulighet til å aksessere telekom-tjenester fra forskjellige lokasjoner og i bevegelse.</td>
+  </tr>
+  <tr>
+    <th>Tjeneste</th>
+    <td>Programvare kan flyttes fra en maskin til en annen.</td>
+    <td>Kunne bruke en tjeneste uavhengig av brukerens og terminalens lokasjon.</td>
+  </tr>
+  <tr>
+    <th>Bruker</th>
+    <td>Tjenestetilgang uavhengig av spesifikk terminal.</td>
+    <td>Mulighet for abonnent å bevege seg til andre lokasjon og kunne bruker 1->n enheter til å koble på 1->n aksessnettverk for å få tilgang til tjenester.</td>
+  </tr>
+  <tr>
+    <th>Person</th>
+    <td>Benytte tjenester tilpasset egne preferanser og brukere uavhengig av fysisk lokasjon.</td>
+    <td>Muligheten for en bruker å aksessere alle telekom-tjenester fra enhver terminal på bakgrunn av personlig identifikasjon.</td>
+  </tr>
+  <tr>
+    <th>Rolle</th>
+    <td>Flere roller/profiler. "Jeg vil være en person på jobb og en annen hjemme."</td>
+    <td></td>
+  <tr>
+    <th>Sesjonskontinuitet</th>
+    <td>Bytte terminal, beholde sesjon (Sesjonsmobilitet)</td>
+    <td>Endre nettverksaksesspunkt mens man opprettholder en sesjon. Gjelder terminal og bruker.</td>
+  </tr>
+  <tr>
+    <th>Nomadism</th>
+    <td></td>
+    <td>Endre nettverksaksesspunkt ved bevegelse. "Hardt" bytte. Diskret.</td>
+  </tr>
+  <tr>
+    <th>Hand-over</th>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
+
 ### Mobilitetshåndtering i GSM
 
-* Kan sees på som terminalmobilitet, men SIM-kortet kan flyttes til en ny terminal. => Brukermobilitet.
-* Handover, kontunuerlig mobilitet. ...
+* Kan sees på som terminalmobilitet, men SIM-kortet kan flyttes til en ny terminal. => Brukermobilitet. SIM-kortets identitet er referansen.
 * Home Location Register (HLR, abonnentregister) inneholder informasjon om tjenester det kan abonneres på, abonnentets status, og oppdatert oppholdsplass for abonnenten, altså hvilket Visiting Location Register (VLR, oppholdsregister) bruker er i.
-* Roaming = En bruker kan bevege seg på tvers av operatørområder. Roaming is defined as the ability for a cellular customer to automatically make and receive voice calls, send and receive data, or access other services, including home data services, when travelling outside the geographical coverage area of the home network, by means of using a visited network.
+* Roaming = En bruker kan bevege seg på tvers av operatørområder. Roaming is defined as the ability for a cellular customer to automatically make and receive voice calls, send and receive data, or access other services, including home data services, when travelling outside the geographical coverage area of the home network, by means of using a visited network. Må autentiseres og autoriseres i besøksområdet.
 * Terminalen scanner kontinuerlig området den befinner seg i, og rapporterer signalstyrke og andre data til BSC (Base Station Controller), som tar avgjørelsen om handover. Hard handover.
+* Anrop gjøres alltid via HLR => Rutes via hjemmeområdet.
+* Handover: 
+  * Kontinuerlig tjeneste selv om brukeren beveger seg fra et dekningsområde til et annet.
+  * Kriterie er i hovedsak kvalitet på mottatt signal. I GSM er det BSC (Base Station Controller) som tar bestemmelsen om handover.
+  * Hard handover.
 
 ![Location updating procedure in GSM](http://github.com/kjbekkelund/ttm4130/raw/master/location-update-gsm.png)
+![Anrop til GSM-mottaker som ikke er i hjemmeområdet](http://github.com/kjbekkelund/ttm4130/raw/master/gsm-visiting-location.png)
+
+SIM inneholder:
+
+* Korttype
+* Serienummer
+* Tjenestetabell
+* IMSI
+* PIN og PUK
+* Autentiseringsnøkkel k<sub>i</sub>
 
 ### Mobilitetshåndtering i IP
 
@@ -197,27 +300,35 @@ Mobility Management is one of the major functions of a GSM or a UMTS network tha
 * Korrespondent brukes som betegnelse på en vertsmaskin som kommuniserer med nomaden.
 * Dersom nomaden flyttes til et nytt område (et annet subnett), må den først registrere seg for FA. Adressen til FA finnes ved å lytte til Agent Announcements. Dersom det finnes en egnet FA, kan registreringen finne sted. FA oppdaterer HA om ny posisjon. Trafikk vil kapsles inn av HA, som sender det videre til FA, som pakker ut datagrammet og presenterer det i eget subnett med nomadens fast IP-adresse som destinasjon (tunnelering).
 * Registrering hos FA har som regel en endelig varighet, og må fornyes, og dette er nomadens plikt å ha oversikt over.
-* Trafikk til nomaden vil alltid rutes via HA.
+* I IPv4 vil all trafikk til nomaden alltid rutes via HA.
 
 #### IPv6
 
 * Tilstandsløs tilordning: Tillater en nomade å selv finne seg en IP "care of"-adresse på et nytt sted. De siste 48 bit i en autokonfigurert adresse vil være lik ethernet-adressen til vertsmaskinen. Dette betyr at også Network Point of Attachment (NPA) er kjent. Vertsmaskinen kan så melde sin "care of"-adresse til egen HA gjennom en Binding Update-melding. Den virker da som sin egen FA.
-* Ruteoptimalisering gir korresponderende node mulighet til å cache nomadens c/o-adresse, og triangulær ruting kan da unngås. 
+* Ruteoptimalisering gir korrespondent mulighet til å cache nomadens c/o-adresse, og triangulær ruting kan da unngås slik at all trafikk ikke lengre trenger å rutes via HA.
+* Både Nomade og Korrespondent benytter hjemmeadresse over IP-laget, mens data sendes ved bruk av "care of"-adresse.
+
+![Ruteoptimalisering i IPv6](http://github.com/kjbekkelund/ttm4130/raw/master/ruteoptimalisering-mobil-ipv6.png)
 
 ### Mobilitetshåndtering i SIP
 
-* Roaming:
-  * Pre-call:
-    * Nomade kan finne SIP-tjener via multicast REGISTER.
-    * Nomade kan få IP-adresse av DHCP.
-    * Nomade oppdaterer egen hjemmeserver og lokasjonstjener.
-  * Mid-call:
-    * Nomade oppnår ny IP-adresse (eks via DHCP), og sender ny INVITE eller RE-INVITE til korrespondent, med ny adresse og oppdatert sesjonsbeskrivelse.
+* Home Registrar og Visiting Registrar istedenfor hhv HLR og VLR i GSM.
+* Roaming
+  * Finne SIP-tjener via multicast `REGISTER`
+  * Kan få IP-adresse via DHCP
+  * Oppdaterer hjemmeserveren
+* Sesjonsmobilitet: Nomade oppnår ny IP-adresse (eks via DHCP), og sender ny `INVITE` eller `RE-INVITE` til korrespondent, med ny adresse og oppdatert sesjonsbeskrivelse. Trenger først å oppdatere HR når man ønsker å motta nye henvendelser.
 
-![Ruteoptimalisering](http://github.com/kjbekkelund/ttm4130/raw/master/optimize-route.png)
+Foreslått system:
+
+* Cell handoff. Ruting av datagrammer skiftes.
+* Subnett handoff. Mobil får tildelt ny IP-adresse, og sender ny `INVITE` eller `RE-INVITE` til korrespondent. For å ikke tape data, opprettes en kortvarig tunnel.
+* Roaming. Subnett handoff + autentisering + autorisering. Kan gjøres uavhengig av underliggende nett-teknologi.
 
 Be able to describe what AAA means and where these functions are used. To be able to give a simple explanation/characterization of the protocols Radius and Diameter 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+**Autentisering, autorisering, Regnskapsføring (Accounting)**
 
 * Disse funksjonene blir viktigere etterhvert som den enkelte terminal og bruker tillates å operere i mange forskjellige nett, samt bruke et rikt tjenesteutvalg supplert fra mange leverandører.
 * Autentisering og autorisering kreves ofte flere ganger, f.eks. for å bli registrert som bruker/abonnement, for å få nettadgang, og for å bruke et bestemt tjenesteutvalg.
@@ -240,6 +351,7 @@ Be able to describe what AAA means and where these functions are used. To be abl
 * Passord/PIN-kode
 * Biometrisk data
 * Flyttbart identitetskort. Brukes i GSM (SIM) og UMTS (USIM).
+* Mutual auth veldig viktig. Eks: Det er ikke nok at en basestasjon kan autentisere en mobil, dersom basestasjonen er falsk. Mobilen må også kunne autentisere basestasjonen.
 
 ### Authorization
 
@@ -247,6 +359,7 @@ Be able to describe what AAA means and where these functions are used. To be abl
 
 * Viktig element for å overvåke normal drift.
 * Ideelt sett skal et system som medfører betaling for kunden også kunne produsere nøyaktig faktureringsgrunnlag. Kan kreve identifikasjon i flere trinn, f.eks. ved adgang til tilleggstjenester.
+* Innsamlet statistikk kan danne grunnlag for konfigurasjon, utbygging, osv.
 
 ### Basismodell
 
