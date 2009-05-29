@@ -800,6 +800,44 @@ The IMS has a layered architecture. Aima at a minimum dependence between layers.
 
 ![IMS layered architecture](http://github.com/kjbekkelund/ttm4130/raw/master/ims-layered-architecture.png)
 
+Categories of IMS entities:
+
+1. Session mangement and routing (CSCF)
+2. Databases (HSS, SLF)
+3. Services (Application server, MRFC, MRFP)
+4. Interworking functions (BGCF, MGCF, IMS-MGW, SGW)
+5. Support functions (PDF, SEG, THIG)
+6. Charging
+
+In IMS the internal functionality of the network entities is not specified in detail. Instead, spesifications describe the reference points between entities and functionalities supported at the reference points.
+
+**Call Session Control Functions**
+
+![Relationship between CSCFs](http://github.com/kjbekkelund/ttm4130/raw/master/cscf-relationship.png)
+
+SIP based proxies:
+
+* **P-CSCF** (Proxy). First contact point for users within the IMS. All SIP signalling trafiic from the UE will be sent to the P-CSCF. Tasks: SIP compression, IPSec security association (SA), interation with Policy Decision Function (PDF), and emergency session detection. Tasked to relay session and media-related information to the PDF when an operator wants to apply SBLP (Service-Based Local Policy). Based on the received information the PDF is able to derive authorized IP QoS information what will be passed to the GGSN when the GGSN needs to perform SBLP prior to accepting a secondary PDP context activation. Via the PDF IMS and GPRS can receive and deliver charging information.
+* **I-CSCF** (Interrogating). Contact point within an operator's network for all connections destined to a subscriber of that network operator. Tasks: Obtaining the name of the next hop from the HSS; Assigning an S-CSCF based on received capabilities from the HSS; Routing incomming requests further to an assigned S-CSCF or the application server; Providing Topology Hiding Inter-network Gateway functionality.
+* **S-CSCF** (Serving). Focal point of the IMS. Responsible for handling registration processes, making routing decisions and maintaining session states, and storing the service profile(s). Downloads authentication data and service profile from the HSS. A service profile is a collection of user-specific information that is permanently stored in the HSS. Able to send accounting-related information to the Online Charging System.
+
+![S-CSCF routing](http://github.com/kjbekkelund/ttm4130/raw/master/s-cscf-routing.png)
+
+**Databases**
+
+Two main databases:
+
+* **Home Subscriber Server** (HSS). Main data storage for all subscriber and service-related data. User identities (private and public), registration information, access paramters and service-triggering functions. Also provides user-specific requirements for S-CSCF capabilities. This information is used by the I-CSCF to select the most suitable S-CSCF for a user. Contains the subset of Home Location Register and Authentication Center (HLR/AuC) functionality required by the PS and CS domain. There may be more than one HSS in a home network.
+* **Subscription Locator Function** (SLF). Used as a resolution mechanism that enables the I-CSCF, the S-CSCF and the AS to find the address of the HSS that holds the subscriber data for a given user identity when there are multiple HSSs.
+
+**Service functions**
+
+Multimedia Resource Function Controller (MRFC), Multimedia Resource Function Processor (MRFP) and Application Server (AS).
+
+ASs are not pure IMS entities, they are functions on top of IMS. Resides in the user's home network or in a third-party location. Main functions: Possibility to process and impact an incomming SIP session received from the IMS; capability to originate SIP requests; capability to send accounting information to the charging functions. The services are not limited purely to SIP-based services since an operator is able to offer access to services based on CAMEL (Customized Applications for Mobile network Enhanced Logic) Service Environment (CSE) and OSA (Open Service Architecture). 1->n AS per subscriber, 1-> AS per session.
+
+MRFC and MRFP together provide mechanisms for bearer-related services. The MRFC is tasked to handle SIP communication to and from the S-CSCF and to control the MRFP. The MRFP in turn provides user-plane resources that are requested and insctructed by the MRFC; e.g. mixing of incomming media streams, media stream source, media stream processing.
+
 Be able to describe the VoIP architecture: SIP (SIP proper)
 -----------------------------------------------------------
 
