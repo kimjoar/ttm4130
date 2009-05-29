@@ -778,9 +778,11 @@ It is agreed upon to merge the results of the IMS work undertaken by the 3GPP wi
   
 ### IMS
 
-IMS is a global, access-independent and standard-based IP connectivity and service control architecture that enables various types of multimedia services to end-users using common Internet-based protocols.
+![IMS Architectural Overview](http://github.com/kjbekkelund/ttm4130/raw/master/ims-architectural-overview.png)
 
-IMS users are able to mix and match a variety of IP-based services in any way they choose during a single communication session.
+* The IP Multimedia Subsystem (IMS) is a global, access-independent and standard-based IP connectivity and service control architecture that enables various types of multimedia services to end-users using common Internet-based protocols. 
+* The IMS is an architectural framework for delivering Internet Protocol (IP) multimedia services.
+* IMS users are able to mix and match a variety of IP-based services in any way they choose during a single communication session.
 
 A user can roam and obtain IP connectivity from the home network. This would allow IMS services when roaming in an area with an IMS network.
 
@@ -837,6 +839,31 @@ Multimedia Resource Function Controller (MRFC), Multimedia Resource Function Pro
 ASs are not pure IMS entities, they are functions on top of IMS. Resides in the user's home network or in a third-party location. Main functions: Possibility to process and impact an incomming SIP session received from the IMS; capability to originate SIP requests; capability to send accounting information to the charging functions. The services are not limited purely to SIP-based services since an operator is able to offer access to services based on CAMEL (Customized Applications for Mobile network Enhanced Logic) Service Environment (CSE) and OSA (Open Service Architecture). 1->n AS per subscriber, 1-> AS per session.
 
 MRFC and MRFP together provide mechanisms for bearer-related services. The MRFC is tasked to handle SIP communication to and from the S-CSCF and to control the MRFP. The MRFP in turn provides user-plane resources that are requested and insctructed by the MRFC; e.g. mixing of incomming media streams, media stream source, media stream processing.
+
+**Interworking functions**
+
+Four interworking function are needed for exchanging signalling and media between IMS and the circuit switched core network:
+
+* Breakout Gateway Control Function (BGCF). To break out the S-CSCF sends a SIP session request to the BGCF, it further chooses where a breakout to the CS domain occurs. If the breakout happens in the same network, the BGCF selects a MGCF to handle the session further, if not the BGCF forwards the session to another BGCF in a selected network.
+* Media Gateway Control Function (MGCF). Performs protocol conversion between SIP protocols and the ISDN User Part (ISUP) or the Bearer Independent Call Control (BICC) and sends the converted request via the SGW to the CS CN.
+* Signalling Gateway (SGW). Perform signalling conversion (both ways) at the transport level between the IP-based transport of signalling and the SS7 based transport of signalling. Does not interpret application layer messages (BICC, ISUP). 
+* IMS Media Gateway (IMS-MGW). Provides the user-plane link between CS CN network and the IMS. Terminates the bearer channels form the CS network and media streams from the backbone network, executes the conversion between these terminations and performs transcoding and signal processing for the user plane when needed.
+
+![Signalling conversion in the SGW](http://github.com/kjbekkelund/ttm4130/raw/master/sgw.png)
+
+**GPRS entities**
+
+* **SGSN** (Serving GRPS Support Node). Links the RAN (Radio Access Network) to the packet core network. Responsible for perform both control and traffic-handling functions for the PS domain. Acts as a gateway for user data tunnelling => relays traffic between UE and the GGSN. Generates charging informaton.
+* **GGSN** (Gateway GPRS Support Node). Provides interworking with external packet data networks. Prime function is to connect the UE to external data networks, where IP-based applications and services reside (E.g. IMS or Internet).
+
+**IMS Reference points**
+
+![IMS Reference Points](http://github.com/kjbekkelund/ttm4130/raw/master/ims-reference-points.png)
+
+* **Gm**. UE -> P-CSCF. Used to transport all SIP signalling between UE and the IMS. Procedure categories: registration, session control, transations.
+* **Mw**. Interface between CSCFs. Procedure categories: registration, session control, transations.
+* **ISC**. Between CSCF and AS. Procedure categories: Routing the initial SIP request to an AS; AS initiated requested.
+* **Cx**. Subscriber and service data is stored in the HSS and need to be utilized by the I-CSCF and S-CSCF when the user registers and receives sessions. The selected protocol is Diameter. Procedure categories: location management, user data handling and user authentication.
 
 Be able to describe the VoIP architecture: SIP (SIP proper)
 -----------------------------------------------------------
