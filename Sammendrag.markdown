@@ -767,10 +767,38 @@ To løsningsmåter:
 Be able to account for network and conceptual architecture for next generation networks (TISPAN/NGN-ETSI and IMS) 
 -----------------------------------------------------------------------------------------------------------------
 
+It is agreed upon to merge the results of the IMS work undertaken by the 3GPP with the NGN work undertaken in TISPAN.
+
+### NGN
+
 * Målet med TISPAN er å komme fram til en generisk NGN-regeransemodell som omfatter sammensmeltingen av fast-nett, mobilnett og interenett-teknologi. En generisk referansemodell definerer en referansearkitektur som er teknologiuavhengig.
 * To fremtidige utviklingsscenarier:
   1. Internett-scenarioet
   2. Teleoperatørscenarioet
+  
+### IMS
+
+IMS is a global, access-independent and standard-based IP connectivity and service control architecture that enables various types of multimedia services to end-users using common Internet-based protocols.
+
+IMS users are able to mix and match a variety of IP-based services in any way they choose during a single communication session.
+
+A user can roam and obtain IP connectivity from the home network. This would allow IMS services when roaming in an area with an IMS network.
+
+![IMS connectivity when user is roaming](http://github.com/kjbekkelund/ttm4130/raw/master/ims-connectivity-roaming.png)
+
+The underlying access and transport networks together with the IMS provide end-to-end Quality of Service (QoS). Negotiates capabilities and expressees its QoS requirements during a SIP session setup. Can negotiate: Media types, direction of traffic, media type bit rate, packet size, packet transport frequency, usage of RTP payload for media, bandwidth adaption.
+
+The IMS has its own authentication and authorization mechanisms between the UE and the IMS network in addition to access network procedures. Supports both online and offline charging capabilities (real time vs not real time).
+
+![IMS charging overview](http://github.com/kjbekkelund/ttm4130/raw/master/ims-charging.png)
+
+In 2G mobile networks the operator of the visiting network control the service utilization (visiting service control). IMS has chosen to concentrate on home service control, i.e. that the service execution is to be controlled by the home operator.
+
+3GPP is standardizing service capabilities and not the service themselves. This is done to create scalable service platforms and as a means to launch new services rapidly.
+
+The IMS has a layered architecture. Aima at a minimum dependence between layers. Increases the importance of the application layer as services are designed to work independent of the access network and the IMS is equipped to bridge the gap between them.
+
+![IMS layered architecture](http://github.com/kjbekkelund/ttm4130/raw/master/ims-layered-architecture.png)
 
 Be able to describe the VoIP architecture: SIP (SIP proper)
 -----------------------------------------------------------
