@@ -394,24 +394,91 @@ Be able to describe what AAA means and where these functions are used. To be abl
 
 ### Radius
 
+Radius = Remote Authentication Dial In User Service
 
+* Networking protocol that provides centralized AAA management for computers to connect and use a network service.
+* En mellomliggende node, f.eks. en Network Access Server virker som en Radius-klient, og tar kontakt med en Radius-tjener. NAS vurderer brukeren, initierer punkt-til-punkt-protokollen, og forhandler med bruker om en IP-adresse. De brukerne som NAS betjener utgjør et eget IP subnett.
+* Client/server protocol that runs in the application layer, using UDP as transport
+* RADIUS serves three functions:
+  1. to authenticate users or devices before granting them access to a network,
+  2. to authorize those users or devices for certain network services and
+  3. to account for usage of those services.
+
+![RADIUS](http://github.com/kjbekkelund/ttm4130/raw/master/radius.png)
+
+### Diameter
+
+I Diameter er det definert et sett av grunnfunksjoner, Diameter Base, som ikke er tiltenkt brukt alene, men sammen med appliasjonsspesifikke tillegg, eks:
+
+* Extensible Authentication Protocol
+* Credit-Control
+* Network Access Server
+* Mobile IPv4
+* Command Codes for the 3GPP Release 5
+
+I Diameter kan man enten benytte hele AAA-spektret eller kun Accounting. 
+
+Sentrale forskjeller mellom Diameter og Radius:
+
+* Reliable transport protocols (TCP or SCTP, not UDP)
+* Network or transport level security (IPsec or TLS)
+* Larger address space for attribute-value pairs (AVPs) and identifiers (32 bits instead of 8 bits)
+* Both stateful and stateless models can be used
+* Dynamic discovery of peers (using DNS SRV and NAPTR)
+* Capability negotiation
+* Better roaming support
+* More easily extended; new commands and attributes can be defined
+* Aligned on 32-bit boundaries
+* Basic support for user-sessions and accounting
+
+Basisprotokollen realiserer overføring av AVP-er (attributt-verdi-par). Nye AVP-er kan bli lagt til Diameter-meldinger, så lenge alle de nødvendige kommer med. Man kan altså utvide protokollen.
+
+* En Diameter-kllient er en enhet som utfører adgangskontroll i kanten av nettet. Eks. Network Access Server og Foreign Agent. Genererer Diameter-meldinger for å kreve autentisering, autorisering eller regnskapsføring på vegne av brukeren.
+* En Diameter-agent er en node som ikke autentiserer og/eller autoriserer meldinger lokalt.
+* En Diameter-tjener utfører autentisering og/eller autorisasjon av bruker.
+* En gitt Diameter-node kan virke som agent for noen og tjener for andre.
+
+Diameters agents are introduced to bring flexibility into the architecture; main advantages:
+
+* distribute administration of systems to a configurable grouping, including the maintenance of security associations.
+* used for concentration of requests from a number of co-located or distributed NAS equipment sets to a set of like user groups.
+* value-added processing to the requests or responses.
+* used for load balancing. A complex network will have multiple authentication sources; agents can sort requests and forward these towards the correct target.
+
+![Mobilitet i IPv4](http://github.com/kjbekkelund/ttm4130/raw/master/inter-realm-mobility.png)
 
 Be able to describe what a Meta Protocol is and how the use of such protocols are intended (with reference to ETSIs TIPHON standards and consecutive standards). 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 * Metaprotokoll: Et domeneuavhengig protokollrammeverk. En metaprotokoll beskriver meldinger som skal sendes, deres informasjonsinnhold og oppførselen til systemene — når meldinger skal sendes og når de skal mottas. En slik metaprotokoll er ikke designet for realisering direkte, men tjener som en referanse for andre protokoller. Realiseringer vil da lett kunne samarbeide, siden de er bygd på samme metaprotokoll.
+* En metaprotokoll håndteres kompleksiteten ved multiprotokoll samvirke.
 * Det er ikke alltid mulig å anvende en metaprotokoll for å generere en fullstending avbildning over til en gitt protokoll. Dette resulterer i at man må 
 definere utvidelser til den eksisterende metaprotokollen eller mangler ved den valgte protokoll.
 * Metaprotokollen kan bli implementert fullstending i den hensikt å utvikle applikasjonstjenere, eller den kan bli brukt som et verktøy for å utvide eksisterende protokoller og sørge for samvirke mellom dem.
 * TIPHON-metaprotokollen definerer en funksjonalitet på applikasjonslagesnivå som omfatter en mengde applikasjoner som anses som nøvendige i neste generasjons telefoni. Metaprotokollen består av tilstandsmaskiner som kan utføre anropsbehandling/sesjonsstyring.
 * Grunnlaget for metaprotokollen er den abstrakte arkitekturen i TISPAN, som definerer funksjonelle lag, referansepunkt og grensesnitt mellom funksjonelle lag. Et funksjonelt lag utfører spesielle sett av oppgaver.
+* Ved å mappe en meta-protokoll til en spesifikk nettløsning, kan man sikre en effektiv veg for å realisere sammenkobling ende til ende.
+* Ved å anvende denne tilnærmingen får man en arkitektur for pakkesvitsjet telefoni som kan anvendes for et tjenestetilbud tilsvarende det man har i tradisjonelle telefonnett, og som kan tilby en utviklingsvei over mot bredbåndsapplikasjoner så vel som mobile anvendelser.
 
 ![Samvirke definert ved hjelp av metaprotokoll](http://github.com/kjbekkelund/ttm4130/raw/master/meta-protocol.png)
 
 Be able to give a review on problems concerning interworking between traditional and IP-based telecommunication networks. 
 -------------------------------------------------------------------------------------------------------------------------
 
-Hovedproblemstillingen er samdrift mellom et IP-nett og SCN. Men også mange andre problemstillinger. Blant annet ønsker man å beskytte tidligere investeringer, og kunne ha en gradvis eller trinnvis overgang fra GSM til UMTS, og en gradvis overgang fra en infrastruktur basert på linjesvitsjing til en infrastruktur basert på pakkesvitsjing. 
+The main issues are:
+
+1. Addressing
+2. Signaling 
+3. Media conversion
+4. Which gateway to use where
+
+History:
+
+* Past: PINT/SPIRITS (signalling)
+* Now: Reference model/gateways (signalling + media)
+* Future: NGN (TIPHON/TISPAN)
+
+Hovedproblemstillingen er samdrift mellom et IP-nett og CSN. Men også mange andre problemstillinger. Blant annet ønsker man å beskytte tidligere investeringer, og kunne ha en gradvis eller trinnvis overgang fra GSM til UMTS, og en gradvis overgang fra en infrastruktur basert på linjesvitsjing til en infrastruktur basert på pakkesvitsjing. 
 
 To former for samdrift:
 * Samdrift av styringssystem, altså samvirke mellom IN-basert styringslogikk og internettbaserte styringssystemer.
@@ -456,9 +523,26 @@ To former for samdrift:
 
 ### IMS
 
-It is desirable for the IMS to interwork with legacy CS networks. This requires interworking both at the user plane and the control plane. Control plane interworking is tasked to the MGCF, while the IMS-MGW translates protocols at the user plane.
+* It is desirable for the IMS to interwork with legacy CS networks. This requires interworking both at the user plane and the control plane. 
+* Control plane interworking is tasked to the MGCF (Media Gateway Control Function). It performs mapping from SIP signalling to the BICC or ISUP used in CS legacy networks.
+* The IMS-MGW (Media Gateway) translates protocols at the user plane. It terminates the bearer channels from the CS networks as well as media streams from IP or ATM.
 
-(Fig 3.23 og 3.24, s 95 IMS)
+**IMS -> CS**
+
+An IMS need not bother about whether the called user is an IMS or a CS user. The session request from the calling user will always arrive at the S-CSCF serving the calling user. When the S-CSCF receives a session request using a tel URL type of user identity, it has to perform an ENUM query to convert the tel URL to a SIP URI. If the S-CSCF is able to convert the identity to a SIP URI format it will route the session further to the target IMS network, and when this conversion fails the S-CSCF will try to reach the user in the CS network.
+
+To break out to the CS network, the S-CSCF routes the session request further to the BGCF (Breakout Gateway Control Function) in the same network. The selected BGCF has two options: 
+
+1. Selecting the breakout point in the same network. The BCGF selects an MGCF in the same network in order to convert SIP signalling to ISUP/BICC signalling and control the IMS-MGW.
+2. Selecting another network to break out the CS network. Selects another BGCF in a different IMS network to select an MGCF in its network for handling breakout.
+
+![IMS -> CS](http://github.com/kjbekkelund/ttm4130/raw/master/ims-to-cs.png)
+
+**CS -> IMS**
+
+When a CS user dials an E.164 number that belongs to an IMS user, it will be handled in the CS network like any other E.164 number; however, after routing analysis it will be sent to an MGCF in the IMS user's home network. After receiving the ISUP/BICC signalling message, the MGCF interacts with the IMS-MGW to create a user-plane connection, converts ISUP/BICC signalling to SIP signalling and sends a SIP INVITE to the I-CSCF, which finds the S-CSCF for the called user with the help of the HSS. Then the S-CSCF takes the necessary action to pass the SIP INVITE to the UE. Thereafter, the MGCF continues communication with the UE and the CS network to set the call up.
+
+![CS -> IMS](http://github.com/kjbekkelund/ttm4130/raw/master/cs-to-ims.png)
 
 Be able to account for the most employed addressing and number systems within communication
 -------------------------------------------------------------------------------------------
