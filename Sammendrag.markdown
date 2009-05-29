@@ -462,8 +462,8 @@ definere utvidelser til den eksisterende metaprotokollen eller mangler ved den v
 
 ![Samvirke definert ved hjelp av metaprotokoll](http://github.com/kjbekkelund/ttm4130/raw/master/meta-protocol.png)
 
-Be able to give a review on problems concerning interworking between traditional and IP-based telecommunication networks. 
--------------------------------------------------------------------------------------------------------------------------
+Be able to give a review on problems concerning interworking between traditional and IP-based telecommunication networks
+------------------------------------------------------------------------------------------------------------------------
 
 The main issues are:
 
@@ -478,7 +478,7 @@ History:
 * Now: Reference model/gateways (signalling + media)
 * Future: NGN (TIPHON/TISPAN)
 
-Hovedproblemstillingen er samdrift mellom et IP-nett og CSN. Men også mange andre problemstillinger. Blant annet ønsker man å beskytte tidligere investeringer, og kunne ha en gradvis eller trinnvis overgang fra GSM til UMTS, og en gradvis overgang fra en infrastruktur basert på linjesvitsjing til en infrastruktur basert på pakkesvitsjing. 
+Hovedproblemstillingen er samdrift mellom et IP-nett og CSN. Men også mange andre problemstillinger. Blant annet ønsker man å beskytte tidligere investeringer, og kunne ha en gradvis eller trinnvis overgang fra GSM til UMTS, og en gradvis overgang fra en infrastruktur basert på linjesvitsjing til en infrastruktur basert på pakkesvitsjing.
 
 To former for samdrift:
 * Samdrift av styringssystem, altså samvirke mellom IN-basert styringslogikk og internettbaserte styringssystemer.
@@ -487,14 +487,11 @@ To former for samdrift:
 ### Samdrift av styringssystem
 
 * IETF tok opp problemet med samvirke mellom IN-tjenester i det offentlige telefonnetter (PSTN) og IP-nettet i arbeidsgruppen PINT (PSTN/Internet Interfaces).
-* PINT adresser "anrop" eller initiering fra internettsiden mot PSTN. Formålet er i hovedsak å kunne tilby telefontjenester initiert ved klikk på en webside.
-* Fokus:
-  * Klikk for å ringe opp
-  * Klikk for å fakse
-  * Klikk for å få faks tilbake
-  * Taletilgang til webtjenester
+* PINT adresser "anrop" eller initiering fra internettsiden mot PSTN. Formålet er i hovedsak å kunne tilby telefontjenester initiert ved klikk på en webside. (Klikk for å ringe opp, klikk for å fakse, klikk for å få faks tilbake, taletilgang til webtjenester).
 * Arbeid videreført i SPIRITS (Service in the PSTN/IN Requesting Internet Service), som ser på initiering fra PSTN mot internett.
-* Komplekst system. Startet derfor med arbeidet med å få til en full samdrift mellom IP-telefoni og PSTN. => Gateways.
+* Komplekst system. Startet derfor med arbeidet med å få til en full samdrift mellom IP-telefoni og PSTN => Gateways
+
+![PINT referansemodell](http://github.com/kjbekkelund/ttm4130/raw/master/pint-reference.png)
 
 ### Samdrift av styringssystem og samband
 
@@ -519,7 +516,7 @@ To former for samdrift:
   * (4) IP-strekningen introduserer en økt og variabel tidsforsinkelse.
   * (2-5) Oppsetning av rene to-parts telefoniforbindelser kan løses relativt enkelt, men multimedie-sesjoner på tvers av CS- og PS-domenet kan by på større problemer.
 
-![PINT referansemodell](http://github.com/kjbekkelund/ttm4130/raw/master/pint-reference.png)
+![Internet/PSTN gateway]((http://github.com/kjbekkelund/ttm4130/raw/master/internet-pstn-gateway.png)
 
 ### IMS
 
