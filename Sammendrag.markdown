@@ -940,6 +940,41 @@ Be able to describe how SIP is intended integrated in 3GPP/UMTS
 Be able to describe the underlying idea/purpose of PARLAY/OSA and how it is realized
 ------------------------------------------------------------------------------------
 
+Parlay/OSA is an API that enables operator and 3rd party applications to make use of network functionality through a set of open, standardised interfaces. The Parlay APIs were designed to be technology-independent, and they work equally well for fixed and mobile networks, and for current and next-generation networks. 
+
+Anvendelse av APIer i et kommunikasjonssystem medfører at det er mulig å skrive flyttbare applikasjons som kan kjøres over en mengde underliggende protokoller uten å måtte endre disse.
+
+Parlay is an open API for the telephone network (fixed and mobile). The objective of Parlay/OSA is to provide an API that is independent of the underlying networking technology and of the programming technology used to create new services. As a result the Parlay/OSA APIs are specified in UML. There are then a set of realizations, or mappings, for specific programming environments: CORBA/IDL, Java, WebService (WSDL).
+
+Parlay/OSA can be used to extend or replace an existing Intelligent Network. The reasons are improved time to market, and enabling the development of value-added services that are network independent. Network independence is important when planning for the transition to IP-based Next Generation Networks since it preserves the investment in existing services. 
+
+Opening up of network by means of standardized APIs based on open technology leads to:
+
+* Shorter TTM for applications/services due to abstraction and open technology
+* Applications can be developed and deployed by 3rd parties
+* Applications can be network independent
+
+The Parlay/OSA Gateway consists of several Service Capability Servers (SCS): functional entities that provide Parlay/OSA interfaces towards applications. 
+
+Each SCS is seen by applications as one or more Service Capability Features (SCF): abstractions of the functionality offered by the network, accessible via the Parlay/OSA API. Sometimes they are also called services. The Parlay/OSA SCFs are specified in terms of interface classes and their methods.
+
+![Parlay/OSA](parlay-osa.png)
+
+The OSA Gateway is viewed by the Applications as a set of interfaces, grouped in terms of functionality into discoverable Service Capability Features (SCF), of two kinds:
+
+* One is a single, always present (one per network) SCS, called the Framework. The OSA Framework is in charge of controlling the access to network capabilities by Applications, as well the integrity of the operator’s network.
+* The rest are a set of SCFs, which abstract the network functionality so that Applications can use the network without needing to understand its underlying technology. These SCFs are mappable to network functionality, but the mapping is not standardized (note that the Framework functionality does not have a mapping).
+
+Besides the OSA API between the OSA Gateway and the 3rd Party Applications, there is an OSA Internal API between the Framework and the rest of the OSA SCSs. This Internal API supports multi-vendorship for the OSA SCSs, as well as the possibility that the Framework functionality is a business in itself.
+
+Et nøkkelkrav sett fra nettoperatør og tjenesteleverandørs side, er å sikre at de definerte APIer ikke utsetter underliggende kommunikasjonsnett for uautorisert bruk eller trusler. Benytter derfor et rammeverk, OSA. Rammeverket består av en programvarekomponent som ved hjelp av krypteringsmetodikk autentiserer applikasjoner og returnerer objektreferanser til tillatte tjenestemuligheter.
+
+![Parlay/OSA i nettet](parlay-osa-overview.png)
+
+![Tjenesteavdekking og -registrering](parlay-osa-services.png)
+
+Parlay/OSA innfører et nytt nettelement, en gateway, som blir benyttet for å koble applikasjoner som benytter OSA APIer til den eksisterende infrastruktur. Denne overgangsenheten kontrolleres av nettoperatør eller tjenesteleverandør og representerer et enkelt punkt som alt samvirke med Parlay/OSA funksjonalitet må passere gjennom. Dette betyr at applikasjonene er atskilt fra de spesielle protokollene som benyttes i selve nettet. Derfor kan de anvendes uten innvirkning på allerede eksiterende applikasjoner og tjenester.
+
 Be able to describe the philosophy behind/principles of “stateless network control” and why it is desirable to implement a service logic mainly based on this principle
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
