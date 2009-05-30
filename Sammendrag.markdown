@@ -986,10 +986,39 @@ Fordi Parlay/OSA baserte tjenester kan utvikles ved bruk av standard programvare
 Be able to describe the philosophy behind/principles of “stateless network control” and why it is desirable to implement a service logic mainly based on this principle
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-Vil man egentlig ha _kun_ et stupid network? Begge deler har sine positive og negative sider. Reliability, Accounting og QoS er fortsatt bedre i intelligente nett, mens det er mye raskere å innføre nye tjenester i dumme nettverk, samt at ...
+Vil man egentlig ha _kun_ et stupid network? Begge deler har sine positive og negative sider. Reliability, Accounting og QoS er fortsatt bedre i intelligente nett, mens det er mye raskere å innføre nye tjenester i dumme nettverk, samt at det dumme nettverks "likhet for alle" skaper større mulighet for innovasjon og nyskapning, noe som henger tett sammen med nettnøytralitet.
 
 Know what a Media Gateway and a Media Gateway Controller is/does
 ----------------------------------------------------------------
+
+A gateway is a device that is used to connect one type of network to another. The gateway's responsibility is to provide signalling interworking, as well as transforming the bearer information into a format that is suitable for the other network. A gateway may exist as a single monolithic device, or it may be decomposed into logical components:
+
+* Signalling Gateway
+* Media Gateway. Necessary in order to convert formats and QoS/resolution to terminals/networks, and to split or merge media streams when it is necessary.
+* Media Gateway Controller. The part that controls the call control. 
+
+Megaco (H.248) is an implementation of the Media Gateway Control Protocol architecture for controlling Media Gateways on IP networks and PSTN. Defines the protocol for Media Gateway Controllers to control Media Gateways for the support of multimedia streams across computer networks. Typically used to provide VoIP services between IP networks and PSTN, or entirely within IP networks.
+
+H.248 contains a framwork that enables one to define control measures for media streams. It is a distributed media gateway. 
+
+H.248 defines the protocols used between elements of a physically decomposed multimedia gateway.
+
+**Termination**. Local entity on a MG that Sources and/or sinks one or more streams.
+
+**Context**. Association between a collection of Terminations. Describes the topology and the media mixing and/or switching parameters is more than two Terminations are involved in an association. The _null_ context contains all Terminations that are not associated with any other Termination. A termination shall only exist in one Context ar a time.
+
+![Example of Megaco Connection Model](http://github.com/kjbekkelund/ttm4130/raw/master/mgw.png)
+
+**Sample topologies**
+
+1. No topology descriptors. All Terminations have a bothway connection to all other Terminations.</td>
+2. T1, T2 Isolate. Removes the connection between T1 and T2. T3 has a bothway connection with both T1 and T2. T1 and T2 have bothway connection to T3.</td>
+3. T3, T2 oneway. A oneway connection from T3 to T2 (i.e. T2 receives media flow from T3). A bothway connection between T1 and T3.</td>
+4. T2, T3 oneway. A oneway connection between T2 to T3. T1 and T3 remain bothway connected.</td>
+5. T2, T3 bothway. T2 is bothway connected to T3. This results in the same as 2.</td>
+6. T1, T2 bothway (T2, T3 bothway and T1, T3 bothway may be implied or explicit). All Terminations have a bothway connection to all other Terminations.</td>
+
+![Sample Topologies](http://github.com/kjbekkelund/ttm4130/raw/master/sample-topologies.png)
 
 Noen ikke-plasserte notater
 ---------------------------
