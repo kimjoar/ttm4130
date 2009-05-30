@@ -958,7 +958,7 @@ The Parlay/OSA Gateway consists of several Service Capability Servers (SCS): fun
 
 Each SCS is seen by applications as one or more Service Capability Features (SCF): abstractions of the functionality offered by the network, accessible via the Parlay/OSA API. Sometimes they are also called services. The Parlay/OSA SCFs are specified in terms of interface classes and their methods.
 
-![Parlay/OSA](parlay-osa.png)
+![Parlay/OSA](http://github.com/kjbekkelund/ttm4130/raw/master/parlay-osa.png)
 
 The OSA Gateway is viewed by the Applications as a set of interfaces, grouped in terms of functionality into discoverable Service Capability Features (SCF), of two kinds:
 
@@ -969,9 +969,9 @@ Besides the OSA API between the OSA Gateway and the 3rd Party Applications, ther
 
 Et nøkkelkrav sett fra nettoperatør og tjenesteleverandørs side, er å sikre at de definerte APIer ikke utsetter underliggende kommunikasjonsnett for uautorisert bruk eller trusler. Benytter derfor et rammeverk, OSA. Rammeverket består av en programvarekomponent som ved hjelp av krypteringsmetodikk autentiserer applikasjoner og returnerer objektreferanser til tillatte tjenestemuligheter.
 
-![Parlay/OSA i nettet](parlay-osa-overview.png)
+![Parlay/OSA i nettet](http://github.com/kjbekkelund/ttm4130/raw/master/parlay-osa-overview.png)
 
-![Tjenesteavdekking og -registrering](parlay-osa-services.png)
+![Tjenesteavdekking og -registrering](http://github.com/kjbekkelund/ttm4130/raw/master/parlay-osa-services.png)
 
 Parlay/OSA innfører et nytt nettelement, en gateway, som blir benyttet for å koble applikasjoner som benytter OSA APIer til den eksisterende infrastruktur. Denne overgangsenheten kontrolleres av nettoperatør eller tjenesteleverandør og representerer et enkelt punkt som alt samvirke med Parlay/OSA funksjonalitet må passere gjennom. Dette betyr at applikasjonene er atskilt fra de spesielle protokollene som benyttes i selve nettet. Derfor kan de anvendes uten innvirkning på allerede eksiterende applikasjoner og tjenester.
 
