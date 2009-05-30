@@ -889,8 +889,82 @@ Be able to describe the VoIP architecture: SIP (SIP proper)
 
 ![Nett-elementer som inngår i SIP](http://github.com/kjbekkelund/ttm4130/raw/master/sip-entities.png)
 
-SIP: Be able to describe the following concepts and their function: Proxy, Redirect Server, Registrar, User Client, SDP
------------------------------------------------------------------------------------------------------------------------
+All-IP nature opens up competition space and removes investment barriers.
+
+What’s the adaptation chance: running homogenous all-IP networks greatly reduces cost and increases competitiveness.
+
+SIP is a mature all-IP technology in polishing stage which is in wide use with an array of equipment from various vendors.
+
+* Distributed end-2-end design
+* Intelligence and states resides in end-devices
+* Network maintains almost zero intelligence (except routing) and state (except routing tables).
+
+Results in flexibility, failure recovery, and scalability.
+
+* SIP is text-oriented protocol – easy to extend and debug
+* The world is split in administrative domains with DNS names
+* Addresses are described using URIs.
+
+Supports locating users, session negotation and changing session state.
+
+ENUM:
+
+* Translates E.164 numbers into URIs
+* Utilizes DNS, reversed dot-separated.
+
+![ENUM Call Flow](http://github.com/kjbekkelund/ttm4130/raw/master/enum-call-flow.png)
+
+SIP is a client-server request-response protocol. Client sends a reuqest to server and awaits reply. Requests can take arbitrarily complex path, and replies follow the same path in reverse direction. 
+
+Usually uses UDP, but TCP is emerging for "bulk" applications and SCTP is rarely used.
+
+![SIP Call OK](http://github.com/kjbekkelund/ttm4130/raw/master/sip-call-ok.png)
+
+SIP gives you a globally reachable address. Callees bind their temporary address to the global one using SIP REGISTER 
+method. Callers use this address to establish real-time communication with callees.
+
+SIP: Be able to describe the following concepts and their function: Proxy, Redirect Server, Registrar, User Agent, SDP
+----------------------------------------------------------------------------------------------------------------------
+
+User Agent:
+
+* Client originates calls, server listens for incomming calls.
+* Softphone, hardphone, webphone, messaging clients, PSTN gateways, ...
+
+Registrar:
+
+* Keeps track of users' whereabouts (Like HLR in GSM)
+* Accept registration requests from users
+
+Proxy:
+
+* Looks up next hops for requests to served users in location database and forwards the requests there.
+* Relays call signaling, i.e. acts as both client and server)
+* Operates in a transactional manner, i.e. no session state.
+* Transparent to end-devices
+* Allows for additional services (call forwarding, AAA, forking, etc.)
+* Maintain ventral role in SIP networks. They glue SIP components such as phones, gateways, applications and other domains by implementing som routing logic.
+* Key Roles: Security, Services and Routing.
+* Steps:
+  * Sanity checks on incoming requests
+  * Canonization of dialled target to E.164 if applicable
+  * Emergency calls
+  * Authenticate originator
+  * Execute callers services, e.g. anonymization
+  * Check request against originator's privileges
+  * Look up recipient
+  * If found, try to execute services
+  * If not found, try to forward to PSTN
+* A proxy may fork a request to multiple destinations either in parallel (“reachme everywhere”) or serially (“forward no reply”). 
+* SIP Proxies may operate either in stateful or stateless mode.
+  * Stateless. Good for heavy-load scenarios. Proxies just receive messages, perform routing logic, send messages out and forget everything. Memory consumption is constant.
+  * Stateful. Good for implementing some services. Maintain state during entire transaction. State is used for services such as accounting, forking, forwarding on some evert. State refers to transactions, not entire calls. Not aware of existing calls. 
+
+Redirect Server:
+
+* Redirects callers to other servers
+
+Registrar, proxy and redirect server are typically part of a single server.
 
 Be able to describe how SIP is intended integrated in 3GPP/UMTS
 ---------------------------------------------------------------
@@ -975,7 +1049,7 @@ Et nøkkelkrav sett fra nettoperatør og tjenesteleverandørs side, er å sikre 
 
 ![Parlay/OSA i nettet](http://github.com/kjbekkelund/ttm4130/raw/master/parlay-osa-overview.png)
 
-![Tjenesteavdekking og -registrering](http://github.com/kjbekkelund/ttm4130/raw/master/parlay-osa-services.png)
+![Registrering, avdekking og bruk av tjeneste](http://github.com/kjbekkelund/ttm4130/raw/master/parlay-sequence.png)
 
 Parlay/OSA innfører et nytt nettelement, en gateway, som blir benyttet for å koble applikasjoner som benytter OSA APIer til den eksisterende infrastruktur. Denne overgangsenheten kontrolleres av nettoperatør eller tjenesteleverandør og representerer et enkelt punkt som alt samvirke med Parlay/OSA funksjonalitet må passere gjennom. Dette betyr at applikasjonene er atskilt fra de spesielle protokollene som benyttes i selve nettet. Derfor kan de anvendes uten innvirkning på allerede eksiterende applikasjoner og tjenester.
 
