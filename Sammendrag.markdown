@@ -958,6 +958,10 @@ The Parlay/OSA Gateway consists of several Service Capability Servers (SCS): fun
 
 Each SCS is seen by applications as one or more Service Capability Features (SCF): abstractions of the functionality offered by the network, accessible via the Parlay/OSA API. Sometimes they are also called services. The Parlay/OSA SCFs are specified in terms of interface classes and their methods.
 
+SCSs provide the applications with SFCs, and are abstractions from underlying network functionality. From the viewpoint of the applications, an SCS can be seen as a resource to the core network.
+
+Services using Parlay are meant to reside outside the network trust boundries.
+
 ![Parlay/OSA](http://github.com/kjbekkelund/ttm4130/raw/master/parlay-osa.png)
 
 The OSA Gateway is viewed by the Applications as a set of interfaces, grouped in terms of functionality into discoverable Service Capability Features (SCF), of two kinds:
@@ -974,6 +978,10 @@ Et nøkkelkrav sett fra nettoperatør og tjenesteleverandørs side, er å sikre 
 ![Tjenesteavdekking og -registrering](http://github.com/kjbekkelund/ttm4130/raw/master/parlay-osa-services.png)
 
 Parlay/OSA innfører et nytt nettelement, en gateway, som blir benyttet for å koble applikasjoner som benytter OSA APIer til den eksisterende infrastruktur. Denne overgangsenheten kontrolleres av nettoperatør eller tjenesteleverandør og representerer et enkelt punkt som alt samvirke med Parlay/OSA funksjonalitet må passere gjennom. Dette betyr at applikasjonene er atskilt fra de spesielle protokollene som benyttes i selve nettet. Derfor kan de anvendes uten innvirkning på allerede eksiterende applikasjoner og tjenester.
+
+Fordi Parlay/OSA baserte tjenester kan utvikles ved bruk av standard programvareverktøy, så kan utviklere med bakgrunn i C++, CORBA, Java og EJB lett realisere dem.
+
+![Open service architecture with API interfaces](http://github.com/kjbekkelund/ttm4130/raw/master/osa.png)
 
 Be able to describe the philosophy behind/principles of “stateless network control” and why it is desirable to implement a service logic mainly based on this principle
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
