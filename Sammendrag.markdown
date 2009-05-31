@@ -962,13 +962,6 @@ Results in flexibility, failure recovery, and scalability.
 
 Supports locating users, session negotation and changing session state.
 
-ENUM:
-
-* Translates E.164 numbers into URIs
-* Utilizes DNS, reversed dot-separated.
-
-![ENUM Call Flow](http://github.com/kjbekkelund/ttm4130/raw/master/images/enum-call-flow.png)
-
 SIP is a client-server request-response protocol. Client sends a reuqest to server and awaits reply. Requests can take arbitrarily complex path, and replies follow the same path in reverse direction. 
 
 Usually uses UDP, but TCP is emerging for "bulk" applications and SCTP is rarely used.
@@ -977,6 +970,13 @@ Usually uses UDP, but TCP is emerging for "bulk" applications and SCTP is rarely
 
 SIP gives you a globally reachable address. Callees bind their temporary address to the global one using SIP REGISTER 
 method. Callers use this address to establish real-time communication with callees.
+
+**ENUM**
+
+* Translates E.164 numbers into URIs
+* Utilizes DNS, reversed dot-separated.
+
+![ENUM Call Flow](http://github.com/kjbekkelund/ttm4130/raw/master/images/enum-call-flow.png)
 
 **Header fields**
 
@@ -992,17 +992,17 @@ SIP messages can carry any type of body and even multipart bodies using MIME
 SIP: Be able to describe the following concepts and their function: Proxy, Redirect Server, Registrar, User Agent, SDP
 ----------------------------------------------------------------------------------------------------------------------
 
-User Agent:
+### User Agent
 
 * Client originates calls, server listens for incomming calls.
 * Softphone, hardphone, webphone, messaging clients, PSTN gateways, ...
 
-Registrar:
+### Registrar
 
 * Keeps track of users' whereabouts (Like HLR in GSM)
 * Accept registration requests from users
 
-Proxy:
+### Proxy
 
 * Looks up next hops for requests to served users in location database and forwards the requests there.
 * Relays call signaling, i.e. acts as both client and server)
@@ -1028,7 +1028,7 @@ Proxy:
 
 ![Forking proxy](http://github.com/kjbekkelund/ttm4130/raw/master/images/sip-forking-proxy.png)
 
-Redirect Server:
+### Redirect Server
 
 * Redirects callers to other servers
 
