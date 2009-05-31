@@ -20,16 +20,6 @@ Know the difference between access network, transport network and service platfo
   * GSM-tjenesteplattform
 * Både IN- og GSM-rammeverket er uenget når mobile brukere ønsker integrering av webbaserte tjenester med vanlig telefoni, med fokus på multimedia-innhold.
 
-### Lagdelt arkitektur
-
-* Lagdelt ut fra det "nivå" funksjonen har.
-* Alminnelig telefonnett: Transportnett som er tidsmultiplekset og realiserer Nett, Link og Fysisk lag. Circuit-switched. Digitalt.
-
-### NGN
-
-* Generisk rammemodell
-* Sammensmelte fastnett, mobilnett og internett.
-
 Be familiar with modeling of a normal telephone calls states, and how to illustrate this by state descriptions and sequence diagrams
 ------------------------------------------------------------------------------------------------------------------------------------
 
@@ -75,8 +65,6 @@ Be familiar with the Intelligent Network architecture
 * The SSPs detect when the SCP should handle a service. The SSP forwards a standardized SS7 (TCAP) message containing relevant service information. Via the TCAP message, the service control logic in the SCP directs the SSPs to perform the individual functions that collectively constitute the service.
 * An Intelligent Network is able to separate the specification, creation, and control of telephony services from physical switching networks.
 
-An IN-compliant service is first constructed through an FE called the Service Creation Environment Function (SCEF). This FE contains the programming environment, which includes the SIB that a programmer uses to construct an IN-compliant service. Once the service logic is created and tested, it is sent to another FE, the service management function (SMF). This FE deploys the service logic to the service execution FEs and allows for service customization. 
-
 ### Konseptuell modell
 
 Konseptuell modell i fire nivåer/plan. Each plane introduces an abstract view of the network entities, which is further made tangible in the plane below it. Tolkes top/down:
@@ -92,9 +80,10 @@ Konseptuell modell i fire nivåer/plan. Each plane introduces an abstract view o
 4. Physical plane. Protokoller og prosessering som beskriver fordelingen av fysiske enheter i nettet. The FEs of the distributed functional plane are mapped to Physical Entities (PE). PEs communicate with each other by exchanging protocol messages (represented by information flows in the distributed functional plane). Describes the physical architecture alternatives for an IN-structured network in terms of potential physical systems, referred to as physical entities (PE), in a network, and interfaces between these PEs. The physical plane architecture describes how functional architecture map into Physical Entities and interfaces.
 
 ![Konseptuell IN-modell](http://github.com/kjbekkelund/ttm4130/raw/master/in-conceptual-model.png)
-![Konseptuell IN-modell](http://github.com/kjbekkelund/ttm4130/raw/master/in-conceptual-model-2.gif)
 ![Nettverksarkitektur IN](http://github.com/kjbekkelund/ttm4130/raw/master/in-network-architecture.gif)
 ![Funksjonelle enheter](http://github.com/kjbekkelund/ttm4130/raw/master/in-distributed-functional-plane-model.png)
+
+An IN-compliant service is first constructed through an FE called the Service Creation Environment Function (SCEF). This FE contains the programming environment, which includes the SIB that a programmer uses to construct an IN-compliant service. Once the service logic is created and tested, it is sent to another FE, the service management function (SMF). This FE deploys the service logic to the service execution FEs and allows for service customization. 
 
 Be familiar with and be able to describe the mode of operations for the most important IN physical and functional entities, including SSP, STP, SCP, SDP and SMF, and what IP indicates in this context/relation. 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
