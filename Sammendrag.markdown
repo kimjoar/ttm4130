@@ -80,8 +80,6 @@ Konseptuell modell i fire nivåer/plan. Each plane introduces an abstract view o
 4. Physical plane. Protokoller og prosessering som beskriver fordelingen av fysiske enheter i nettet. The FEs of the distributed functional plane are mapped to Physical Entities (PE). PEs communicate with each other by exchanging protocol messages (represented by information flows in the distributed functional plane). Describes the physical architecture alternatives for an IN-structured network in terms of potential physical systems, referred to as physical entities (PE), in a network, and interfaces between these PEs. The physical plane architecture describes how functional architecture map into Physical Entities and interfaces.
 
 ![Konseptuell IN-modell](http://github.com/kjbekkelund/ttm4130/raw/master/in-conceptual-model.png)
-![Nettverksarkitektur IN](http://github.com/kjbekkelund/ttm4130/raw/master/in-network-architecture.gif)
-![Funksjonelle enheter](http://github.com/kjbekkelund/ttm4130/raw/master/in-distributed-functional-plane-model.png)
 
 An IN-compliant service is first constructed through an FE called the Service Creation Environment Function (SCEF). This FE contains the programming environment, which includes the SIB that a programmer uses to construct an IN-compliant service. Once the service logic is created and tested, it is sent to another FE, the service management function (SMF). This FE deploys the service logic to the service execution FEs and allows for service customization. 
 
@@ -129,7 +127,7 @@ Disse enhetene er stort sett forbundet ved hjelp av SS7-signalisering.
 * Enhet utstyrt med tonesender/-mottaker, opptaker/avspiller for kunde- og systemgenererte meldinger.
 * An SCP or Adjunct can request an SSP to connect a user to a resource located in an IP that is connected to the SSP from which the service request is detected. An SCP or Adjunct can also request the SSP to connect a user to a resource located in an IP that is connected to another SSP.
 
-### Signal Transfer Point
+### Signal Transfer Point (STP)
 
 * Enhet/ruter for signaleringstrafikk. Fordeler signaleringstrafikken mot SCP på en hensiktsmessig måte.
 
@@ -146,6 +144,10 @@ Disse enhetene er stort sett forbundet ved hjelp av SS7-signalisering.
 ### Service Node (SN)
 
 * Separat sammensatt node med en rekke funksjoner, satt sammen for å dekke lokalt behov. Stort sett samme funksjonalitet som en SSP, men ikke tilknyttet en sentral, altså kan den ikke behandle "normale" anrop.
+
+![Nettverksarkitektur IN](http://github.com/kjbekkelund/ttm4130/raw/master/in-network-architecture.gif)
+
+![Funksjonelle enheter](http://github.com/kjbekkelund/ttm4130/raw/master/in-distributed-functional-plane-model.png)
 
 Know what Signalling System No 7 is and how it is used
 ------------------------------------------------------
