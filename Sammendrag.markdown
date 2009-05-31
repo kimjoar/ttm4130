@@ -265,7 +265,7 @@ Mobilitet handler om å være mobil, ikke trådløs.
   <tr>
     <th>Hand-over</th>
     <td></td>
-    <td></td>
+    <td>Special case of session continuity where the incurred interruption or loss of data is below certain limits such that real-time services can be continued despite of the change of access point</td>
   </tr>
 </table>
 
@@ -459,6 +459,8 @@ definere utvidelser til den eksisterende metaprotokollen eller mangler ved den v
 * Grunnlaget for metaprotokollen er den abstrakte arkitekturen i TISPAN, som definerer funksjonelle lag, referansepunkt og grensesnitt mellom funksjonelle lag. Et funksjonelt lag utfører spesielle sett av oppgaver.
 * Ved å mappe en meta-protokoll til en spesifikk nettløsning, kan man sikre en effektiv veg for å realisere sammenkobling ende til ende.
 * Ved å anvende denne tilnærmingen får man en arkitektur for pakkesvitsjet telefoni som kan anvendes for et tjenestetilbud tilsvarende det man har i tradisjonelle telefonnett, og som kan tilby en utviklingsvei over mot bredbåndsapplikasjoner så vel som mobile anvendelser.
+* Overgang fra metaprotokoll-beskrivelse til en konkret protokoll skal skje via en ETSI-spesifisert avbildningsfunksjon (mapping function).
+* Metaprotokollene etablerer et felles språk som kan spenne over flere varianter av teknologi og underliggende løsninger.
 
 ![Samvirke definert ved hjelp av metaprotokoll](http://github.com/kjbekkelund/ttm4130/raw/master/meta-protocol.png)
 
@@ -771,11 +773,63 @@ It is agreed upon to merge the results of the IMS work undertaken by the 3GPP wi
 
 ### NGN
 
+* Next Generation Networking (NGN) is a broad term to describe some key architectural evolutions in telecommunication core network and access networks.
 * Målet med TISPAN er å komme fram til en generisk NGN-regeransemodell som omfatter sammensmeltingen av fast-nett, mobilnett og interenett-teknologi. En generisk referansemodell definerer en referansearkitektur som er teknologiuavhengig.
 * To fremtidige utviklingsscenarier:
   1. Internett-scenarioet
   2. Teleoperatørscenarioet
-  
+* Abstrakt arkitektur med tilhørende grensesnitt og referansepunkter. På grunnlag av denne arkitekturen spesifiserer man så oppførsel og samvirke ved hjelp av metaprotokoller.
+* "all-IP" is sometimes used to describe the transformation towards NGN
+* In the core network, NGN implies a consolidation of several transport networks into one core transport network
+
+The NGN functional architecture is structured according to a service layer (Application plane) and an IP-based transport layer (Transport plane).
+
+Service layer:
+
+* IMS
+* PSTN/ISDN Emulation Subsystem
+* Other multimedia subsystems and appliations
+* Common components, such as charging, user profile management, security mangement, routing data bases (ENUM), ...
+
+![NGN overall architecture](http://github.com/kjbekkelund/ttm4130/raw/master/ngn-overall-architecture.png)
+
+The core network of NGN Release 1 is required to be based upon the IMS
+
+The access network is defined as a collection of network entities and interfaces that provides the underlying IP transport connectivity between the device and the NGN core entities.
+
+The NGN will support a variety of terminals end user equipment.
+
+NGN supports the delivery of end-user services through application servers, rather than directly embedding services as capabilities in the control protocols
+
+Third-party service providers and applications are supported through suitable control interfaces.
+
+NGN standardizes service capabilities and not the services themselves.
+
+Major service capabilities 
+* Session establishment and control for session based services, including: Real-time conversational services (voice, multi-media, messaging, etc.), Multimedia Telephony.Videotelephony. 
+* Presence.
+* PSTN/ISDN migration scenarios for both replacement and evolution (emulation and simulation).
+
+![NGN overview](http://github.com/kjbekkelund/ttm4130/raw/master/ngn-overview.png)
+
+NGN should enable all possible types of billing arrangements, as well as accounting (between providers). This includes also e-commerce arrangements.
+
+Billing, charging and accounting in NGN will be based on the collection of information from any appropriate entities in the form of Charging Data Records (CDRs).
+
+--
+
+Domener er en samling av fysiske eller funksjonelle enheter styrt av en administrasjon under et sammenfallende sett av kjøreregler og kompatible teknikker. Tre typer: Sluttbruker, tjeneste og transport.
+
+Funksjonelle grupper beskriver funksjoner som er nødvendig for å kunne tilby IP-telefoni på tvers av domener. Funksjonelle grupper i sluttbrukerdomenet:
+
+* Terminalfunksjonell gruppe. Representerer alle IP-telefonifunksjoner i en brukerterminal. Anropende eller mottakende.
+* (Terminal-)registreringsfunksjonalitet: Nødvendige funksjoner for å oppnå og vedlikeholde registrering av en brukerterminal.
+
+Funksjonelle grupper i tjenestedomenet:
+
+* Nettverksfunsjonell gruppe. Samling av nødvendige funksjoner for å kunne etablerer en forbindelse mellom to terminaler, mellom en gateway og en terminal, eller mellom to gateways.
+* Gateway-funksjonalitet. Inneholder samme funksjonalitet som nettverksfunksjonell gruppe, men i tillegg har den også funksjoner som tillatter opprettelsen av forbindelse mellom linjesvitsjede og pakkesvitsjede nett. 
+
 ### IMS
 
 ![IMS Architectural Overview](http://github.com/kjbekkelund/ttm4130/raw/master/ims-architectural-overview.png)
@@ -865,6 +919,16 @@ Four interworking function are needed for exchanging signalling and media betwee
 * **ISC**. Between CSCF and AS. Procedure categories: Routing the initial SIP request to an AS; AS initiated requested.
 * **Cx**. Subscriber and service data is stored in the HSS and need to be utilized by the I-CSCF and S-CSCF when the user registers and receives sessions. The selected protocol is Diameter. Procedure categories: location management, user data handling and user authentication.
 
+![Hish-level IMS session establishment flow](http://github.com/kjbekkelund/ttm4130/raw/master/ims-establishment.png)
+
+Private User Identity. NAI (Network Access Identifier). Included in all registrations. The S-CSCF need to obtain and store the Private NAI, but it is not used for routing SIP messages. Valid through the period of subscription. Not possible to modify for the UE. Stored in the HSS, and may be referred to in CDRs.
+
+Public User Identity. SIP URI og Tel-URL. At least one Public User ID must be stored in ISIM. Must be registered before acting as receiving IMS point. Not possible to modify for the UE. Possible to register multiple public user IDs. 
+
+![Relationship between user identities](http://github.com/kjbekkelund/ttm4130/raw/master/ims-user-identities.png)
+
+![Sharing a single user identity between multiple devices](http://github.com/kjbekkelund/ttm4130/raw/master/ims-identity-devices.png)
+
 Be able to describe the VoIP architecture: SIP (SIP proper)
 -----------------------------------------------------------
 
@@ -923,6 +987,17 @@ Usually uses UDP, but TCP is emerging for "bulk" applications and SCTP is rarely
 SIP gives you a globally reachable address. Callees bind their temporary address to the global one using SIP REGISTER 
 method. Callers use this address to establish real-time communication with callees.
 
+**Header fields**
+
+* To: URI of the request. A tag can be used to distinguish between different UAs.
+* From: URI of the sender
+* Cseq: A sequence number and a method name (used for matching requests and responses)
+* Call-ID: Unique identifier for a SIP message exchange (signaling session)
+* Max-forwards: A number that is decremented by one by every proxy. Request is discarded when it reaches zero
+* Via: Keeps track of all the proxies used. The responses use the same chain of proxies when returning.
+
+SIP messages can carry any type of body and even multipart bodies using MIME
+
 SIP: Be able to describe the following concepts and their function: Proxy, Redirect Server, Registrar, User Agent, SDP
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -960,11 +1035,17 @@ Proxy:
   * Stateless. Good for heavy-load scenarios. Proxies just receive messages, perform routing logic, send messages out and forget everything. Memory consumption is constant.
   * Stateful. Good for implementing some services. Maintain state during entire transaction. State is used for services such as accounting, forking, forwarding on some evert. State refers to transactions, not entire calls. Not aware of existing calls. 
 
+![Forking proxy](http://github.com/kjbekkelund/ttm4130/raw/master/sip-forking-proxy.png)
+
 Redirect Server:
 
 * Redirects callers to other servers
 
+![Redirect server](http://github.com/kjbekkelund/ttm4130/raw/master/sip-redirect-server.png)
+
 Registrar, proxy and redirect server are typically part of a single server.
+
+![Proxy and registrar kept separate](http://github.com/kjbekkelund/ttm4130/raw/master/sip-separate-proxy.png)
 
 Be able to describe how SIP is intended integrated in 3GPP/UMTS
 ---------------------------------------------------------------
