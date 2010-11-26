@@ -8,7 +8,7 @@ Sammendraget er basert på læringsmålene i faget, og tar utgangspunkt i fagets
 Know the difference between access network, transport network and service platform/IN
 -------------------------------------------------------------------------------------
 
-![Grov oppdeling av nettet](http://github.com/kjbekkelund/ttm4130/raw/master/images/oppdeling.png)
+![Grov oppdeling av nettet](https://github.com/kjbekkelund/ttm4130/raw/master/images/oppdeling.png)
 
 * Et moderne kommunikasjonssystem består av et aksessnett og et kjernenett, der kjernenettet gjerne deles i to nivåer, tjenesteplattform og transportnett.
 * Transportnett: Formidler nytteinformasjon, "budskapet", mellom deltagerne.
@@ -30,7 +30,7 @@ Vanskelig å få tilgang til terminaltilstanden til en telefon direkte, og overv
 
 Realiseres i form av tilstandsmaskiner. Hver enkelt abonnentlinje må ha sin egen tilstandsmaskin.
 
-![Tilstandsmaskiner](http://github.com/kjbekkelund/ttm4130/raw/master/images/tilstandsmaskiner.png)
+![Tilstandsmaskiner](https://github.com/kjbekkelund/ttm4130/raw/master/images/tilstandsmaskiner.png)
 
 Minst tre forskjellige nivåer av informasjon for å overvåke tilstanden i nettet:
 
@@ -79,14 +79,14 @@ Konseptuell modell i fire nivåer/plan. Each plane introduces an abstract view o
 3. Distributed functional plane. Inneholder en beskrivelse av hvordan SIB-funksjonalitet skapes ved hjelp av Functional Entities (FE). FE-kan distribueres i nettet, men én enkelt FE kan ikke distribueres. Altså kan FE-ene til én SIB være distribuert. Hver FE må utføre en Functional Entity Action (FEA), som er realisert ved hjelp av Elementary Functions (EF). Informasjonsflyten mellom flere FE-er går via FEA-ene. SIBs are realized by a sequence of FEAs in an FE. For at en gruppe funksjonelle enheter skal kunne realisere en SIB må de ha de nødvendige egenskaper og kunne samarbeide.
 4. Physical plane. Protokoller og prosessering som beskriver fordelingen av fysiske enheter i nettet. The FEs of the distributed functional plane are mapped to Physical Entities (PE). PEs communicate with each other by exchanging protocol messages (represented by information flows in the distributed functional plane). Describes the physical architecture alternatives for an IN-structured network in terms of potential physical systems, referred to as physical entities (PE), in a network, and interfaces between these PEs. The physical plane architecture describes how functional architecture map into Physical Entities and interfaces.
 
-![Konseptuell IN-modell](http://github.com/kjbekkelund/ttm4130/raw/master/images/in-conceptual-model.png)
+![Konseptuell IN-modell](https://github.com/kjbekkelund/ttm4130/raw/master/images/in-conceptual-model.png)
 
 An IN-compliant service is first constructed through an FE called the Service Creation Environment Function (SCEF). This FE contains the programming environment, which includes the SIB that a programmer uses to construct an IN-compliant service. Once the service logic is created and tested, it is sent to another FE, the service management function (SMF). This FE deploys the service logic to the service execution FEs and allows for service customization. 
 
 Be familiar with and be able to describe the mode of operations for the most important IN physical and functional entities, including SSP, STP, SCP, SDP and SMF, and what IP indicates in this context/relation. 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-![PEs and FEs](http://github.com/kjbekkelund/ttm4130/raw/master/images/pe-and-fe.png)
+![PEs and FEs](https://github.com/kjbekkelund/ttm4130/raw/master/images/pe-and-fe.png)
 
 Disse enhetene er stort sett forbundet ved hjelp av SS7-signalisering.
 
@@ -145,9 +145,9 @@ Disse enhetene er stort sett forbundet ved hjelp av SS7-signalisering.
 
 * Separat sammensatt node med en rekke funksjoner, satt sammen for å dekke lokalt behov. Stort sett samme funksjonalitet som en SSP, men ikke tilknyttet en sentral, altså kan den ikke behandle "normale" anrop.
 
-![Nettverksarkitektur IN](http://github.com/kjbekkelund/ttm4130/raw/master/images/in-network-architecture.gif)
+![Nettverksarkitektur IN](https://github.com/kjbekkelund/ttm4130/raw/master/images/in-network-architecture.gif)
 
-![Funksjonelle enheter](http://github.com/kjbekkelund/ttm4130/raw/master/images/in-distributed-functional-plane-model.png)
+![Funksjonelle enheter](https://github.com/kjbekkelund/ttm4130/raw/master/images/in-distributed-functional-plane-model.png)
 
 Know what Signalling System No 7 is and how it is used
 ------------------------------------------------------
@@ -179,8 +179,8 @@ Know what Signalling System No 7 is and how it is used
 * Signaling Connection Control Part (SCCP). Provides connectionless and connection-oriented network services.
 * Transaction Capabilities Applications Part (TCAP). Supports the exchange of non-circuit related data between applications across the SS7 network using the SCCP connectionless service. Queries and responses sent between SSPs and SCPs are carried in TCAP messages.
 
-![SS7 arkitektur](http://github.com/kjbekkelund/ttm4130/raw/master/images/ss7-architecture.png)
-![Comparison of transport layers](http://github.com/kjbekkelund/ttm4130/raw/master/images/comparison-transport-layer.png)
+![SS7 arkitektur](https://github.com/kjbekkelund/ttm4130/raw/master/images/ss7-architecture.png)
+![Comparison of transport layers](https://github.com/kjbekkelund/ttm4130/raw/master/images/comparison-transport-layer.png)
 
 ### Signaleringssystemer i IP-nett
 
@@ -272,8 +272,8 @@ Mobilitet handler om å være mobil, ikke trådløs.
   * Kriterie er i hovedsak kvalitet på mottatt signal. I GSM er det BSC (Base Station Controller) som tar bestemmelsen om handover.
   * Hard handover.
 
-![Location updating procedure in GSM](http://github.com/kjbekkelund/ttm4130/raw/master/images/location-update-gsm.png)
-![Anrop til GSM-mottaker som ikke er i hjemmeområdet](http://github.com/kjbekkelund/ttm4130/raw/master/images/gsm-visiting-location.png)
+![Location updating procedure in GSM](https://github.com/kjbekkelund/ttm4130/raw/master/images/location-update-gsm.png)
+![Anrop til GSM-mottaker som ikke er i hjemmeområdet](https://github.com/kjbekkelund/ttm4130/raw/master/images/gsm-visiting-location.png)
 
 SIM inneholder:
 
@@ -299,7 +299,7 @@ SIM inneholder:
 * Ruteoptimalisering gir korrespondent mulighet til å cache nomadens c/o-adresse, og triangulær ruting kan da unngås slik at all trafikk ikke lengre trenger å rutes via HA.
 * Både Nomade og Korrespondent benytter hjemmeadresse over IP-laget, mens data sendes ved bruk av "care of"-adresse.
 
-![Ruteoptimalisering i IPv6](http://github.com/kjbekkelund/ttm4130/raw/master/images/ruteoptimalisering-mobil-ipv6.png)
+![Ruteoptimalisering i IPv6](https://github.com/kjbekkelund/ttm4130/raw/master/images/ruteoptimalisering-mobil-ipv6.png)
 
 ### Mobilitetshåndtering i SIP
 
@@ -354,7 +354,7 @@ Be able to describe what AAA means and where these functions are used. To be abl
 
 ### Basismodell
 
-![AAA-tjenere i hjemme- og lokaldomenet.](http://github.com/kjbekkelund/ttm4130/raw/master/images/aaa-local-home-domain.png)
+![AAA-tjenere i hjemme- og lokaldomenet.](https://github.com/kjbekkelund/ttm4130/raw/master/images/aaa-local-home-domain.png)
 
 * Betjeningsnoden (NAS/FA/B) har ofte ikke direkte adgang til data som trengs for å sluttføre transaksjonen. Konsulterer da en autoritet, som vanligvis ligger i det samme administrative domenet, for å skaffe seg bevis for at klienten har akseptable fullmakter.
 * Siden betjeningsnoden og den lokale autoritet tilhører samme administrative domene antas det at de har etablert, eller er i stand til å etablere, en sikker kanal som tillater utveksling av informasjon relatert til adgangskontroll.
@@ -395,7 +395,7 @@ Radius = Remote Authentication Dial In User Service
   2. to authorize those users or devices for certain network services and
   3. to account for usage of those services.
 
-![RADIUS](http://github.com/kjbekkelund/ttm4130/raw/master/images/radius.png)
+![RADIUS](https://github.com/kjbekkelund/ttm4130/raw/master/images/radius.png)
 
 ### Diameter
 
@@ -436,7 +436,7 @@ Diameters agents are introduced to bring flexibility into the architecture; main
 * value-added processing to the requests or responses.
 * used for load balancing. A complex network will have multiple authentication sources; agents can sort requests and forward these towards the correct target.
 
-![Mobilitet i IPv4](http://github.com/kjbekkelund/ttm4130/raw/master/images/inter-realm-mobility.png)
+![Mobilitet i IPv4](https://github.com/kjbekkelund/ttm4130/raw/master/images/inter-realm-mobility.png)
 
 Be able to describe what a Meta Protocol is and how the use of such protocols are intended (with reference to ETSIs TIPHON standards and consecutive standards). 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -453,7 +453,7 @@ definere utvidelser til den eksisterende metaprotokollen eller mangler ved den v
 * Overgang fra metaprotokoll-beskrivelse til en konkret protokoll skal skje via en ETSI-spesifisert avbildningsfunksjon (mapping function).
 * Metaprotokollene etablerer et felles språk som kan spenne over flere varianter av teknologi og underliggende løsninger.
 
-![Samvirke definert ved hjelp av metaprotokoll](http://github.com/kjbekkelund/ttm4130/raw/master/images/meta-protocol.png)
+![Samvirke definert ved hjelp av metaprotokoll](https://github.com/kjbekkelund/ttm4130/raw/master/images/meta-protocol.png)
 
 Be able to give a review on problems concerning interworking between traditional and IP-based telecommunication networks
 ------------------------------------------------------------------------------------------------------------------------
@@ -484,7 +484,7 @@ To former for samdrift:
 * Arbeid videreført i SPIRITS (Service in the PSTN/IN Requesting Internet Service), som ser på initiering fra PSTN mot internett.
 * Komplekst system. Startet derfor med arbeidet med å få til en full samdrift mellom IP-telefoni og PSTN => Gateways
 
-![PINT referansemodell](http://github.com/kjbekkelund/ttm4130/raw/master/images/pint-reference.png)
+![PINT referansemodell](https://github.com/kjbekkelund/ttm4130/raw/master/images/pint-reference.png)
 
 ### Samdrift av styringssystem og samband
 
@@ -509,7 +509,7 @@ To former for samdrift:
   * (4) IP-strekningen introduserer en økt og variabel tidsforsinkelse.
   * (2-5) Oppsetning av rene to-parts telefoniforbindelser kan løses relativt enkelt, men multimedie-sesjoner på tvers av CS- og PS-domenet kan by på større problemer.
 
-![Internet/PSTN gateway]((http://github.com/kjbekkelund/ttm4130/raw/master/images/internet-pstn-gateway.png)
+![Internet/PSTN gateway]((https://github.com/kjbekkelund/ttm4130/raw/master/images/internet-pstn-gateway.png)
 
 ### IMS
 
@@ -526,13 +526,13 @@ To break out to the CS network, the S-CSCF routes the session request further to
 1. Selecting the breakout point in the same network. The BCGF selects an MGCF in the same network in order to convert SIP signalling to ISUP/BICC signalling and control the IMS-MGW.
 2. Selecting another network to break out the CS network. Selects another BGCF in a different IMS network to select an MGCF in its network for handling breakout.
 
-![IMS -> CS](http://github.com/kjbekkelund/ttm4130/raw/master/images/ims-to-cs.png)
+![IMS -> CS](https://github.com/kjbekkelund/ttm4130/raw/master/images/ims-to-cs.png)
 
 **CS -> IMS**
 
 When a CS user dials an E.164 number that belongs to an IMS user, it will be handled in the CS network like any other E.164 number; however, after routing analysis it will be sent to an MGCF in the IMS user's home network. After receiving the ISUP/BICC signalling message, the MGCF interacts with the IMS-MGW to create a user-plane connection, converts ISUP/BICC signalling to SIP signalling and sends a SIP INVITE to the I-CSCF, which finds the S-CSCF for the called user with the help of the HSS. Then the S-CSCF takes the necessary action to pass the SIP INVITE to the UE. Thereafter, the MGCF continues communication with the UE and the CS network to set the call up.
 
-![CS -> IMS](http://github.com/kjbekkelund/ttm4130/raw/master/images/cs-to-ims.png)
+![CS -> IMS](https://github.com/kjbekkelund/ttm4130/raw/master/images/cs-to-ims.png)
 
 Be able to account for the most employed addressing and number systems within communication
 -------------------------------------------------------------------------------------------
@@ -552,7 +552,7 @@ Be able to account for the most employed addressing and number systems within co
 * Alle vertsmaskiner må ha minst en autorativ navnetjener.
 * Because of the huge volume of requests generated by a system like DNS, the designers wished to provide a mechanism to reduce the load on individual DNS servers. To this end, the DNS resolution process allows for caching.
 
-![Iterativt DNS-oppslag](http://github.com/kjbekkelund/ttm4130/raw/master/images/dns-lookup.png)
+![Iterativt DNS-oppslag](https://github.com/kjbekkelund/ttm4130/raw/master/images/dns-lookup.png)
 
 ### IPv6
 
@@ -566,7 +566,7 @@ A subnetwork, or subnet, describes networked computers and devices that have a c
 * I IPv6 blir adressene tilordnet grensesnitt, ikke noder. 
 * Addresses are assigned to interfaces, and a single network host or node can have multiple interfaces, or a single interface with multiple addresses.
 
-![Adressetyper i IPv6](http://github.com/kjbekkelund/ttm4130/raw/master/images/ipv6-address-types.png)
+![Adressetyper i IPv6](https://github.com/kjbekkelund/ttm4130/raw/master/images/ipv6-address-types.png)
 
 #### Uspesifisert
 
@@ -711,7 +711,7 @@ I fremtidige IP-baserte Multimediakjernenett (IMCN) opererer man med tre typer I
 2. Offentlig brukeridentitet. Den gyldige "anropsidentiteten". Skal ha form som en SIP URL eller eventuelt foreligge i "tel:"-URL-formatet.
 3. Temporær offentlig brukeridentitet. 
 
-![Forhold mellom private og offentlige brukeridentiteter](http://github.com/kjbekkelund/ttm4130/raw/master/images/nai-user-identities.png)
+![Forhold mellom private og offentlige brukeridentiteter](https://github.com/kjbekkelund/ttm4130/raw/master/images/nai-user-identities.png)
 
 CSCF-, BGCF- og MGCF-noder skal kunne identifiseres ved hjelp av gyldige SIP URL-er over de grensesnitt som støtter SIP-protokollen.
 
@@ -782,7 +782,7 @@ Service layer:
 * Other multimedia subsystems and appliations
 * Common components, such as charging, user profile management, security mangement, routing data bases (ENUM), ...
 
-![NGN overall architecture](http://github.com/kjbekkelund/ttm4130/raw/master/images/ngn-overall-architecture.png)
+![NGN overall architecture](https://github.com/kjbekkelund/ttm4130/raw/master/images/ngn-overall-architecture.png)
 
 The core network of NGN Release 1 is required to be based upon the IMS
 
@@ -801,7 +801,7 @@ Major service capabilities
 * Presence.
 * PSTN/ISDN migration scenarios for both replacement and evolution (emulation and simulation).
 
-![NGN overview](http://github.com/kjbekkelund/ttm4130/raw/master/images/ngn-overview.png)
+![NGN overview](https://github.com/kjbekkelund/ttm4130/raw/master/images/ngn-overview.png)
 
 NGN should enable all possible types of billing arrangements, as well as accounting (between providers). This includes also e-commerce arrangements.
 
@@ -823,7 +823,7 @@ Funksjonelle grupper i tjenestedomenet:
 
 ### IMS
 
-![IMS Architectural Overview](http://github.com/kjbekkelund/ttm4130/raw/master/images/ims-architectural-overview.png)
+![IMS Architectural Overview](https://github.com/kjbekkelund/ttm4130/raw/master/images/ims-architectural-overview.png)
 
 * The IP Multimedia Subsystem (IMS) is a global, access-independent and standard-based IP connectivity and service control architecture that enables various types of multimedia services to end-users using common Internet-based protocols. 
 * The IMS is an architectural framework for delivering Internet Protocol (IP) multimedia services.
@@ -831,13 +831,13 @@ Funksjonelle grupper i tjenestedomenet:
 
 A user can roam and obtain IP connectivity from the home network. This would allow IMS services when roaming in an area with an IMS network.
 
-![IMS connectivity when user is roaming](http://github.com/kjbekkelund/ttm4130/raw/master/images/ims-connectivity-roaming.png)
+![IMS connectivity when user is roaming](https://github.com/kjbekkelund/ttm4130/raw/master/images/ims-connectivity-roaming.png)
 
 The underlying access and transport networks together with the IMS provide end-to-end Quality of Service (QoS). Negotiates capabilities and expressees its QoS requirements during a SIP session setup. Can negotiate: Media types, direction of traffic, media type bit rate, packet size, packet transport frequency, usage of RTP payload for media, bandwidth adaption.
 
 The IMS has its own authentication and authorization mechanisms between the UE and the IMS network in addition to access network procedures. Supports both online and offline charging capabilities (real time vs not real time).
 
-![IMS charging overview](http://github.com/kjbekkelund/ttm4130/raw/master/images/ims-charging.png)
+![IMS charging overview](https://github.com/kjbekkelund/ttm4130/raw/master/images/ims-charging.png)
 
 In 2G mobile networks the operator of the visiting network control the service utilization (visiting service control). IMS has chosen to concentrate on home service control, i.e. that the service execution is to be controlled by the home operator.
 
@@ -845,7 +845,7 @@ In 2G mobile networks the operator of the visiting network control the service u
 
 The IMS has a layered architecture. Aima at a minimum dependence between layers. Increases the importance of the application layer as services are designed to work independent of the access network and the IMS is equipped to bridge the gap between them.
 
-![IMS layered architecture](http://github.com/kjbekkelund/ttm4130/raw/master/images/ims-layered-architecture.png)
+![IMS layered architecture](https://github.com/kjbekkelund/ttm4130/raw/master/images/ims-layered-architecture.png)
 
 Categories of IMS entities:
 
@@ -860,7 +860,7 @@ In IMS the internal functionality of the network entities is not specified in de
 
 **Call Session Control Functions**
 
-![Relationship between CSCFs](http://github.com/kjbekkelund/ttm4130/raw/master/images/cscf-relationship.png)
+![Relationship between CSCFs](https://github.com/kjbekkelund/ttm4130/raw/master/images/cscf-relationship.png)
 
 SIP based proxies:
 
@@ -868,7 +868,7 @@ SIP based proxies:
 * **I-CSCF** (Interrogating). Contact point within an operator's network for all connections destined to a subscriber of that network operator. Tasks: Obtaining the name of the next hop from the HSS; Assigning an S-CSCF based on received capabilities from the HSS; Routing incomming requests further to an assigned S-CSCF or the application server; Providing Topology Hiding Inter-network Gateway functionality.
 * **S-CSCF** (Serving). Focal point of the IMS. Responsible for handling registration processes, making routing decisions and maintaining session states, and storing the service profile(s). Downloads authentication data and service profile from the HSS. A service profile is a collection of user-specific information that is permanently stored in the HSS. Able to send accounting-related information to the Online Charging System.
 
-![S-CSCF routing](http://github.com/kjbekkelund/ttm4130/raw/master/images/s-cscf-routing.png)
+![S-CSCF routing](https://github.com/kjbekkelund/ttm4130/raw/master/images/s-cscf-routing.png)
 
 **Databases**
 
@@ -894,7 +894,7 @@ Four interworking function are needed for exchanging signalling and media betwee
 * Signalling Gateway (SGW). Perform signalling conversion (both ways) at the transport level between the IP-based transport of signalling and the SS7 based transport of signalling. Does not interpret application layer messages (BICC, ISUP). 
 * IMS Media Gateway (IMS-MGW). Provides the user-plane link between CS CN network and the IMS. Terminates the bearer channels form the CS network and media streams from the backbone network, executes the conversion between these terminations and performs transcoding and signal processing for the user plane when needed.
 
-![Signalling conversion in the SGW](http://github.com/kjbekkelund/ttm4130/raw/master/images/sgw.png)
+![Signalling conversion in the SGW](https://github.com/kjbekkelund/ttm4130/raw/master/images/sgw.png)
 
 **GPRS entities**
 
@@ -903,22 +903,22 @@ Four interworking function are needed for exchanging signalling and media betwee
 
 **IMS Reference points**
 
-![IMS Reference Points](http://github.com/kjbekkelund/ttm4130/raw/master/images/ims-reference-points.png)
+![IMS Reference Points](https://github.com/kjbekkelund/ttm4130/raw/master/images/ims-reference-points.png)
 
 * **Gm**. UE -> P-CSCF. Used to transport all SIP signalling between UE and the IMS. Procedure categories: registration, session control, transations.
 * **Mw**. Interface between CSCFs. Procedure categories: registration, session control, transations.
 * **ISC**. Between CSCF and AS. Procedure categories: Routing the initial SIP request to an AS; AS initiated requested.
 * **Cx**. Subscriber and service data is stored in the HSS and need to be utilized by the I-CSCF and S-CSCF when the user registers and receives sessions. The selected protocol is Diameter. Procedure categories: location management, user data handling and user authentication.
 
-![Hish-level IMS session establishment flow](http://github.com/kjbekkelund/ttm4130/raw/master/images/ims-establishment.png)
+![Hish-level IMS session establishment flow](https://github.com/kjbekkelund/ttm4130/raw/master/images/ims-establishment.png)
 
 Private User Identity. NAI (Network Access Identifier). Included in all registrations. The S-CSCF need to obtain and store the Private NAI, but it is not used for routing SIP messages. Valid through the period of subscription. Not possible to modify for the UE. Stored in the HSS, and may be referred to in CDRs.
 
 Public User Identity. SIP URI og Tel-URL. At least one Public User ID must be stored in ISIM. Must be registered before acting as receiving IMS point. Not possible to modify for the UE. Possible to register multiple public user IDs. 
 
-![Relationship between user identities](http://github.com/kjbekkelund/ttm4130/raw/master/images/ims-user-identities.png)
+![Relationship between user identities](https://github.com/kjbekkelund/ttm4130/raw/master/images/ims-user-identities.png)
 
-![Sharing a single user identity between multiple devices](http://github.com/kjbekkelund/ttm4130/raw/master/images/ims-identity-devices.png)
+![Sharing a single user identity between multiple devices](https://github.com/kjbekkelund/ttm4130/raw/master/images/ims-identity-devices.png)
 
 Be able to describe the VoIP architecture: SIP (SIP proper)
 -----------------------------------------------------------
@@ -942,7 +942,7 @@ Be able to describe the VoIP architecture: SIP (SIP proper)
 * Registreringsfunksjonen i SIP kan være lagt til en proxy-tjener. Dersom den legges til egen tjener kalles denne Registrar. En registrar vil normalt skrive resultatet av registreringen i en location server, og virker som en slags HLR i GSM.
 * SIP is a permanent element of the IP Multimedia Subsystem (IMS) architecture for IP-based streaming multimedia services in cellular systems.
 
-![Nett-elementer som inngår i SIP](http://github.com/kjbekkelund/ttm4130/raw/master/images/sip-entities.png)
+![Nett-elementer som inngår i SIP](https://github.com/kjbekkelund/ttm4130/raw/master/images/sip-entities.png)
 
 All-IP nature opens up competition space and removes investment barriers.
 
@@ -966,7 +966,7 @@ SIP is a client-server request-response protocol. Client sends a reuqest to serv
 
 Usually uses UDP, but TCP is emerging for "bulk" applications and SCTP is rarely used.
 
-![SIP Call OK](http://github.com/kjbekkelund/ttm4130/raw/master/images/sip-call-ok.png)
+![SIP Call OK](https://github.com/kjbekkelund/ttm4130/raw/master/images/sip-call-ok.png)
 
 SIP gives you a globally reachable address. Callees bind their temporary address to the global one using SIP REGISTER 
 method. Callers use this address to establish real-time communication with callees.
@@ -976,7 +976,7 @@ method. Callers use this address to establish real-time communication with calle
 * Translates E.164 numbers into URIs
 * Utilizes DNS, reversed dot-separated.
 
-![ENUM Call Flow](http://github.com/kjbekkelund/ttm4130/raw/master/images/enum-call-flow.png)
+![ENUM Call Flow](https://github.com/kjbekkelund/ttm4130/raw/master/images/enum-call-flow.png)
 
 **Header fields**
 
@@ -1026,17 +1026,17 @@ SIP: Be able to describe the following concepts and their function: Proxy, Redir
   * Stateless. Good for heavy-load scenarios. Proxies just receive messages, perform routing logic, send messages out and forget everything. Memory consumption is constant.
   * Stateful. Good for implementing some services. Maintain state during entire transaction. State is used for services such as accounting, forking, forwarding on some evert. State refers to transactions, not entire calls. Not aware of existing calls. 
 
-![Forking proxy](http://github.com/kjbekkelund/ttm4130/raw/master/images/sip-forking-proxy.png)
+![Forking proxy](https://github.com/kjbekkelund/ttm4130/raw/master/images/sip-forking-proxy.png)
 
 ### Redirect Server
 
 * Redirects callers to other servers
 
-![Redirect server](http://github.com/kjbekkelund/ttm4130/raw/master/images/sip-redirect-server.png)
+![Redirect server](https://github.com/kjbekkelund/ttm4130/raw/master/images/sip-redirect-server.png)
 
 Registrar, proxy and redirect server are typically part of a single server.
 
-![Proxy and registrar kept separate](http://github.com/kjbekkelund/ttm4130/raw/master/images/sip-separate-proxy.png)
+![Proxy and registrar kept separate](https://github.com/kjbekkelund/ttm4130/raw/master/images/sip-separate-proxy.png)
 
 Be able to describe how SIP is intended integrated in 3GPP/UMTS
 ---------------------------------------------------------------
@@ -1081,7 +1081,7 @@ Be able to describe how SIP is intended integrated in 3GPP/UMTS
 * En basissesjon mellom en bruker i UMTS-multimedienett og et punkt i PSTN involverer én S-CSCF for UE-en, én BGCF for å velge PSTN-gateway, og én MGCF for styring av mediekonvertering via a vis PSTN.
 * S-CSCF tilsvarer CCAF i IN, den er grensen mellom bruker og oppsetning i nettet.
 
-![Omgivelser for SIP-basert tjenestestyring i UMPS IP-basert multimediakjernenett](http://github.com/kjbekkelund/ttm4130/raw/master/images/sip-environment.png)
+![Omgivelser for SIP-basert tjenestestyring i UMPS IP-basert multimediakjernenett](https://github.com/kjbekkelund/ttm4130/raw/master/images/sip-environment.png)
 
 Be able to describe the underlying idea/purpose of PARLAY/OSA and how it is realized
 ------------------------------------------------------------------------------------
@@ -1108,7 +1108,7 @@ SCSs provide the applications with SFCs, and are abstractions from underlying ne
 
 Services using Parlay are meant to reside outside the network trust boundries.
 
-![Parlay/OSA](http://github.com/kjbekkelund/ttm4130/raw/master/images/parlay-osa.png)
+![Parlay/OSA](https://github.com/kjbekkelund/ttm4130/raw/master/images/parlay-osa.png)
 
 The OSA Gateway is viewed by the Applications as a set of interfaces, grouped in terms of functionality into discoverable Service Capability Features (SCF), of two kinds:
 
@@ -1119,15 +1119,15 @@ Besides the OSA API between the OSA Gateway and the 3rd Party Applications, ther
 
 Et nøkkelkrav sett fra nettoperatør og tjenesteleverandørs side, er å sikre at de definerte APIer ikke utsetter underliggende kommunikasjonsnett for uautorisert bruk eller trusler. Benytter derfor et rammeverk, OSA. Rammeverket består av en programvarekomponent som ved hjelp av krypteringsmetodikk autentiserer applikasjoner og returnerer objektreferanser til tillatte tjenestemuligheter.
 
-![Parlay/OSA i nettet](http://github.com/kjbekkelund/ttm4130/raw/master/images/parlay-osa-overview.png)
+![Parlay/OSA i nettet](https://github.com/kjbekkelund/ttm4130/raw/master/images/parlay-osa-overview.png)
 
-![Registrering, avdekking og bruk av tjeneste](http://github.com/kjbekkelund/ttm4130/raw/master/images/parlay-sequence.png)
+![Registrering, avdekking og bruk av tjeneste](https://github.com/kjbekkelund/ttm4130/raw/master/images/parlay-sequence.png)
 
 Parlay/OSA innfører et nytt nettelement, en gateway, som blir benyttet for å koble applikasjoner som benytter OSA APIer til den eksisterende infrastruktur. Denne overgangsenheten kontrolleres av nettoperatør eller tjenesteleverandør og representerer et enkelt punkt som alt samvirke med Parlay/OSA funksjonalitet må passere gjennom. Dette betyr at applikasjonene er atskilt fra de spesielle protokollene som benyttes i selve nettet. Derfor kan de anvendes uten innvirkning på allerede eksiterende applikasjoner og tjenester.
 
 Fordi Parlay/OSA baserte tjenester kan utvikles ved bruk av standard programvareverktøy, så kan utviklere med bakgrunn i C++, CORBA, Java og EJB lett realisere dem.
 
-![Open service architecture with API interfaces](http://github.com/kjbekkelund/ttm4130/raw/master/images/osa.png)
+![Open service architecture with API interfaces](https://github.com/kjbekkelund/ttm4130/raw/master/images/osa.png)
 
 Be able to describe the philosophy behind/principles of “stateless network control” and why it is desirable to implement a service logic mainly based on this principle
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1153,7 +1153,7 @@ H.248 defines the protocols used between elements of a physically decomposed mul
 
 **Context**. Association between a collection of Terminations. Describes the topology and the media mixing and/or switching parameters is more than two Terminations are involved in an association. The _null_ context contains all Terminations that are not associated with any other Termination. A termination shall only exist in one Context ar a time.
 
-![Example of Megaco Connection Model](http://github.com/kjbekkelund/ttm4130/raw/master/images/mgw.png)
+![Example of Megaco Connection Model](https://github.com/kjbekkelund/ttm4130/raw/master/images/mgw.png)
 
 **Sample topologies**
 
@@ -1164,7 +1164,7 @@ H.248 defines the protocols used between elements of a physically decomposed mul
 5. T2, T3 bothway. T2 is bothway connected to T3. This results in the same as 2.</td>
 6. T1, T2 bothway (T2, T3 bothway and T1, T3 bothway may be implied or explicit). All Terminations have a bothway connection to all other Terminations.</td>
 
-![Sample Topologies](http://github.com/kjbekkelund/ttm4130/raw/master/images/sample-topologies.png)
+![Sample Topologies](https://github.com/kjbekkelund/ttm4130/raw/master/images/sample-topologies.png)
 
 Noen ikke-plasserte notater
 ---------------------------
